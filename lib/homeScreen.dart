@@ -8,7 +8,7 @@ import 'package:testproject/modules/slideModule.dart';
 import 'package:testproject/navigateItem.dart';
 import 'package:testproject/productScreen.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
-import 'package:testproject/tabPages/deals/dealsPage.dart';
+import 'package:testproject/tabPages/deals/dealPageScreen.dart';
 import 'package:testproject/tabPages/homePage/homePageScreen.dart';
 import 'package:testproject/tabPages/profile/profilePage.dart';
 import 'sharedWidgets/itemContainer.dart';
@@ -177,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
 
             GlobalVariables.selectedTap == 0? HomePageScreen()
-            : GlobalVariables. selectedTap == 1? DealsPage()
+            : GlobalVariables. selectedTap == 1? DealPageScreen()
             //: GlobalVariables.selectedTap == 2? CartPage()
             //: GlobalVariables.selectedTap == 3? BrandPage()
             :  ProfilePage(),
