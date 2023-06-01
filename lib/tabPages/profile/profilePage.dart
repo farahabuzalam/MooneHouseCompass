@@ -43,8 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       decoration: BoxDecoration(shape: BoxShape.circle,
                       color: AppColor.white,
                       border: Border.all(color: AppColor.white ) ),
-                        child: IconButton(onPressed: ()=> share(),
-                            icon: Icon(Icons.share_outlined, color: AppColor.mainColor,))
+                        child: IconButton(onPressed: ()=> share(), icon: Icon(Icons.share_outlined, color: AppColor.mainColor,))
                     )
                   ]
                 ),

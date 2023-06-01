@@ -5,6 +5,9 @@ class ItemContainerModule{
   String?  details, brand, origin;
   int? count;
   double price;
+  bool isDeal;
+  double? oldPrice;
+
   ItemContainerModule({
     required this.off,
     required this.rating,
@@ -16,5 +19,7 @@ class ItemContainerModule{
     this.details,
     this.brand,
     this.origin,
+    required this.isDeal,
+    this.oldPrice
   });
 }

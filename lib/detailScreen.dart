@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/globalVariables.dart';
 import 'package:testproject/modules/cartListModule.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
-import 'package:flutter_share/flutter_share.dart';
 
 class DetailScreen extends StatefulWidget {
   ItemContainerModule item;
@@ -44,30 +44,26 @@ class _DetailScreenState extends State<DetailScreen> {
               child: ListView(
                 children : [
                       Stack(
-                        children:[ Container(
-
-
-                          child:
-                          Padding(
+                        children: [Container(
+                          child: Padding(
                               padding: EdgeInsets.all(AppSize.padding10),
-                              child: Image.network(widget.item.image, fit: BoxFit.fill)
+                              child: Image.network(widget.item.image)
                           ),
                         ),
                           Align(
                               alignment: Alignment.topRight,
                               child: Container (
                                   decoration: new BoxDecoration(shape: BoxShape.circle,
-                                      color: Colors.white38,
+                                    color: Colors.white38,
                                     border: Border.all(color:Colors.white38 ),
 
                                   ),
 
-                            child:IconButton(onPressed: ()=> share(),
-                                icon: Icon(Icons.share_outlined, color: AppColor.mainColor,))
-                          )
+                                  child:IconButton(onPressed: ()=> share(),
+                                      icon: Icon(Icons.share_outlined, color: AppColor.mainColor,))
+                              )
                           ),
-                       ],
-                      ),
+                      ]),
                   Row(
                       children: [
                         Text(widget.item.name, style: TextStyle(fontSize: 40, color: Colors.green)),
@@ -80,9 +76,20 @@ class _DetailScreenState extends State<DetailScreen> {
 
                   _printdetail(widget.item.details),
 
-                     Text(
-                      widget.item.price.toString(),
-                      style: TextStyle(fontSize: 20, color: Colors.green),
+                     Row(
+                       children: [
+                         Text(
+                          widget.item.price.toString(),
+                          style: TextStyle(fontSize: 20, color: Colors.green),
+                         ),
+                         SizedBox(width: 15),
+
+                           Visibility(
+                               visible: widget.item.isDeal,
+                               child:
+                           Text(widget.item.oldPrice.toString(), style: TextStyle(fontSize: 20, decoration: TextDecoration. lineThrough),))
+
+                       ],
                      ),
 
                   _printdetail(widget.item.brand),
@@ -131,13 +138,6 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
 
 
-    );
-  }
-  Future<void> share() async {
-    await FlutterShare.share(
-      title: 'Example share',
-      text: 'Example share text',
-      //chooserTitle: 'Example Chooser Title'
     );
   }
 
@@ -200,6 +200,14 @@ class _DetailScreenState extends State<DetailScreen> {
     widget.item.count = _count;
     Navigator.pop(context, );
 
+  }
+
+  Future<void> share() async {
+    await FlutterShare.share(
+      title: 'Example share',
+      text: 'Example share text',
+      //chooserTitle: 'Example Chooser Title'
+    );
   }
 
 }

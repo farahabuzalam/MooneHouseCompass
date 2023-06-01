@@ -34,7 +34,10 @@ class _DealPageScreen extends State<DealPageScreen> {
         price: 196,
         details: 'Chocolates and Dates set',
         origin: 'Origin: UAE',
-        brand: 'Brand: Moonehouse'));
+        brand: 'Brand: Moonehouse',
+      isDeal: true,
+      oldPrice: 200));
+
     _bundles.add(ItemContainerModule(
         off: 'off',
         rating: '3',
@@ -45,7 +48,10 @@ class _DealPageScreen extends State<DealPageScreen> {
         price: 300,
         origin: 'Origin: UAE',
         details: 'Refreshing Water',
-        brand: 'Brand: MooneHouse'));
+        brand: 'Brand: MooneHouse',
+        isDeal: true,
+        oldPrice: 400));
+
     _bundles.add(ItemContainerModule(
         off: 'off',
         rating: '4',
@@ -56,7 +62,9 @@ class _DealPageScreen extends State<DealPageScreen> {
         price: 175,
         origin: 'Origin: UAE',
         details: 'Freshly extracted oil',
-        brand: 'Brand: MooneHouse'));
+        brand: 'Brand: MooneHouse',
+        isDeal: true,
+        oldPrice: 200));
 
     _bundles.add(ItemContainerModule(
         off: 'off',
@@ -68,7 +76,10 @@ class _DealPageScreen extends State<DealPageScreen> {
         price: 48,
         details: 'Refreshing juices with mulyiple flavors',
         brand: 'Brand: MooneHouse',
-        origin: 'Origin: UAE'));
+        origin: 'Origin: UAE',
+        isDeal: true,
+        oldPrice: 150));
+
     _bundles.add(ItemContainerModule(
         off: 'off',
         rating: '2.7',
@@ -79,7 +90,10 @@ class _DealPageScreen extends State<DealPageScreen> {
         price: 42,
         origin: 'Origin: UAE',
         details: 'Essential spices in everyday cooking',
-        brand: 'Brand: MooneHouse'));
+        brand: 'Brand: MooneHouse',
+        isDeal: true,
+        oldPrice: 100));
+
     _bundles.add(ItemContainerModule(
         off: 'off',
         rating: '4.2',
@@ -90,9 +104,11 @@ class _DealPageScreen extends State<DealPageScreen> {
         price: 72,
         origin: 'Origin: UAE',
         details: 'Multi-grain rice',
-        brand: 'Brand: MooneHouse'));
+        brand: 'Brand: MooneHouse',
+        isDeal: true,
+        oldPrice: 80));
 
-    _freedelivery.add(ItemContainerModule(
+    /*_freedelivery.add(ItemContainerModule(
         off: 'off',
         rating: '5',
         name: 'olives',
@@ -159,7 +175,7 @@ class _DealPageScreen extends State<DealPageScreen> {
         origin: 'Origin: UAE',
         details: 'some almonds',
         brand: 'Brand: MooneHouse'));
-
+*/
   }
 
 
@@ -173,7 +189,7 @@ class _DealPageScreen extends State<DealPageScreen> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         
 
-                         childAspectRatio: 0.6,
+                         childAspectRatio: 0.55,
                           crossAxisSpacing: AppSize.padding10,
                           mainAxisSpacing: AppSize.padding10,
                           crossAxisCount: 2
@@ -189,9 +205,6 @@ class _DealPageScreen extends State<DealPageScreen> {
   
 
 
-_gridList(List<ItemContainerModule>list){
-//  list.map((e) => DealClass(item: e,refresh: ()=> _setState(),)).toList();
-}
 _text(text) {
   return Text(
     text,
