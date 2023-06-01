@@ -5,6 +5,7 @@ import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/globalVariables.dart';
 import 'package:testproject/modules/cartListModule.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 class DetailScreen extends StatefulWidget {
   ItemContainerModule item;
@@ -42,9 +43,30 @@ class _DetailScreenState extends State<DetailScreen> {
        Expanded(
               child: ListView(
                 children : [
-                      Padding(
-                          padding: EdgeInsets.all(AppSize.padding10),
-                          child: Image.network(widget.item.image)
+                      Stack(
+                        children:[ Container(
+
+
+                          child:
+                          Padding(
+                              padding: EdgeInsets.all(AppSize.padding10),
+                              child: Image.network(widget.item.image, fit: BoxFit.fill)
+                          ),
+                        ),
+                          Align(
+                              alignment: Alignment.topRight,
+                              child: Container (
+                                  decoration: new BoxDecoration(shape: BoxShape.circle,
+                                      color: Colors.white38,
+                                    border: Border.all(color:Colors.white38 ),
+
+                                  ),
+
+                            child:IconButton(onPressed: ()=> share(),
+                                icon: Icon(Icons.share_outlined, color: AppColor.mainColor,))
+                          )
+                          ),
+                       ],
                       ),
                   Row(
                       children: [
@@ -109,6 +131,13 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
 
 
+    );
+  }
+  Future<void> share() async {
+    await FlutterShare.share(
+      title: 'Example share',
+      text: 'Example share text',
+      //chooserTitle: 'Example Chooser Title'
     );
   }
 
