@@ -40,7 +40,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         price: 64,
         details: 'these are pinenuts',
         origin: 'Origin: UAE',
-        brand: 'Brand: Moonehouse'));
+        brand: 'Brand: Moonehouse',
+    isDeal: false));
 
     _ramadanList.add(ItemContainerModule(
         off: 'off',
@@ -52,7 +53,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         price: 18,
         origin: 'Origin: UAE',
         details: 'freshly baked bread',
-        brand: 'Brand: MooneHouse'));
+        brand: 'Brand: MooneHouse',
+        isDeal: false));
 
     _ramadanList.add(ItemContainerModule(
         off: 'off',
@@ -64,7 +66,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         price: 76,
         origin: 'Origin: UAE',
         details: 'whole-wheat flour',
-        brand: 'Brand: MooneHouse'));
+        brand: 'Brand: MooneHouse',
+        isDeal: false));
 
     _ramadanBest.add(ItemContainerModule(
         off: 'off',
@@ -76,7 +79,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         price: 9,
         origin: 'Origin: UAE',
         brand: 'Brand: MooneHouse',
-        details: 'green and black olives'));
+        details: 'green and black olives',
+        isDeal: false));
 
     _ramadanBest.add(ItemContainerModule(
         off: 'off',
@@ -88,7 +92,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         price: 20,
         origin: 'Origin: UAE',
         details: 'low sugar',
-        brand: 'Brand: MooneHouse'));
+        brand: 'Brand: MooneHouse',
+        isDeal: false));
 
     _ramadanBest.add(ItemContainerModule(
         off: 'off',
@@ -100,7 +105,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         price: 15,
         origin: 'Origin: UAE',
         details: 'frozen sambosa dough',
-        brand: 'Brand: MooneHouse'));
+        brand: 'Brand: MooneHouse',
+        isDeal: false));
 
     _ramadanRecent.add(ItemContainerModule(
         off: 'off',
@@ -112,7 +118,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         price: 12,
         details: 'akawi cheese',
         brand: 'Brand: MooneHouse',
-        origin: 'Origin: UAE'));
+        origin: 'Origin: UAE',
+        isDeal: false));
 
     _ramadanRecent.add(ItemContainerModule(
         off: 'off',
@@ -124,7 +131,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         price: 7,
         origin: 'Origin: UAE',
         details: 'some pistachio',
-        brand: 'Brand: MooneHouse'));
+        brand: 'Brand: MooneHouse',
+        isDeal: false));
 
     _ramadanRecent.add(ItemContainerModule(
         off: 'off',
@@ -136,7 +144,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
         price: 7,
         origin: 'Origin: UAE',
         details: 'some almonds',
-        brand: 'Brand: MooneHouse'));
+        brand: 'Brand: MooneHouse',
+        isDeal: false));
 
     _slideList.add(Slide(
         image:

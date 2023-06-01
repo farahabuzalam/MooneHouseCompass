@@ -94,6 +94,7 @@ class _DealCountState extends State<DealCount> {
                   ),
                 ],
               ),
+
               Container(
                   padding: EdgeInsets.all(AppSize.padding10),
                   decoration: BoxDecoration(
@@ -104,12 +105,15 @@ class _DealCountState extends State<DealCount> {
                   ),
                   child: Text(
                     '${widget.item.price}',
+
                     textAlign: TextAlign.start,
                     style: TextStyle(
                         color: AppColor.black,
                         backgroundColor: AppColor.yellow,
                         fontSize: 20),
-                  )),
+                  )
+              ),
+              Text(widget.item.oldPrice.toString(), style: TextStyle(decoration: TextDecoration. lineThrough),),
               Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
