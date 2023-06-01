@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
 import 'package:testproject/tabPages/deals/dealCount.dart';
@@ -182,25 +183,57 @@ class _DealPageScreen extends State<DealPageScreen> {
 
   Widget build(BuildContext context) {
     return Expanded(
-        child:
-               GridView(
-                 padding: EdgeInsets.all(AppSize.padding10),
-                      //scrollDirection: Axis.horizontal,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        
+                       child:
 
-                         childAspectRatio: 0.55,
-                          crossAxisSpacing: AppSize.padding10,
-                          mainAxisSpacing: AppSize.padding10,
-                          crossAxisCount: 2
-                      ),
-                  children: _bundles.map((e) => DealCount(item:e)).toList()
-                 ,
+                       Padding(
+                         padding: EdgeInsets.all(AppSize.padding10),
+                         child: Column(
+                           children: [
+                             Expanded(
+                               flex: 1,
+                               child: SingleChildScrollView(
+                                   scrollDirection: Axis.horizontal,
+                                   padding: EdgeInsets.all(AppSize.padding10),
+                                   child: Row(
+                                     children: [
+                                       _topBarItem(Icon(Icons.shopping_cart_checkout_outlined, size: 30), "Bundles" ),
+                                       SizedBox(width:10),
+                                       _topBarItem(Icon(Icons.shopping_cart_checkout_outlined, size: 30), "Above 50%" ),
+                                       SizedBox(width:10),
+                                       _topBarItem(Icon(Icons.shopping_cart_checkout_outlined, size: 30), "Below 50%" ),
+                                       SizedBox(width:10),
+                                       _topBarItem(Icon(Icons.timelapse_outlined, size: 30), "Buy One\nGet One" ),
+                                       SizedBox(width:10),
+                                       _topBarItem(Icon(Icons.fire_truck_outlined, size: 30), "Free Delivery" ),
+                                     ],
+                                   )
+                               ),
+                             ),
 
-                  ),
+
+                             Expanded(
+                              flex: 3,
+                               child: GridView(
+                                 padding: EdgeInsets.all(AppSize.padding10),
+                                      //scrollDirection: Axis.horizontal,
+                                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
 
 
-    );
+                                         childAspectRatio: 0.55,
+                                          crossAxisSpacing: AppSize.padding10,
+                                          mainAxisSpacing: AppSize.padding10,
+                                          crossAxisCount: 2
+                                      ),
+                                  children: _bundles.map((e) => DealCount(item:e)).toList()
+                                 ,
+
+                                  ),
+                             ),
+                             ]
+                         ),
+                       )
+
+                       );
   }
   
 
@@ -210,6 +243,33 @@ _text(text) {
     text,
     style: TextStyle(fontSize: 20),
   );
+}
+
+_topBarItem(icon, label){
+    return GestureDetector(
+      onTap: ()=> null,
+      child: Container(
+        padding: EdgeInsets.all(AppSize.padding10),
+
+        decoration: BoxDecoration(
+            border: Border.all(color: AppColor.mainColor),
+             borderRadius: BorderRadius.all(Radius.circular(AppSize.curve))
+        ),
+
+        height: 100,
+        width: 100,
+
+          child: Column(
+            children: [
+              icon,
+              SizedBox(height: 5),
+              Text(label, style: TextStyle(fontSize: 15,), textAlign: TextAlign.center,
+              )
+            ],
+          )
+
+      ),
+    );
 }
 
 }
