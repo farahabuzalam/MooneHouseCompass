@@ -66,7 +66,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       ]),
                   Row(
                       children: [
-                        Text(widget.item.name, style: TextStyle(fontSize: 40, color: Colors.green)),
+                        Text(widget.item.name, style: TextStyle(fontSize: 35, color: Colors.green)),
                         Spacer(),
                         Icon(Icons.star, color: Colors.yellow, size: 30),
                         Text(widget.item.rating, style: TextStyle(fontSize: 20, color: Colors.black)),
