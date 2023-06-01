@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/tabPages/profile/profileCont.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -91,5 +92,12 @@ class _ProfilePageState extends State<ProfilePage> {
     );
 
 
+  }
+  Future<void> share() async {
+    await FlutterShare.share(
+      title: 'Example share',
+      text: 'Example share text',
+      //chooserTitle: 'Example Chooser Title'
+    );
   }
 }
