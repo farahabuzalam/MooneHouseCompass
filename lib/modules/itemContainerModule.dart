@@ -6,7 +6,7 @@ class ItemContainerModule{
   int? count;
   double price;
   bool isDeal;
-  double? oldPrice;
+  double oldPrice;
 
   ItemContainerModule({
     required this.off,
@@ -20,6 +20,6 @@ class ItemContainerModule{
     this.brand,
     this.origin,
     required this.isDeal,
-    this.oldPrice
+    required this.oldPrice
   });
 }

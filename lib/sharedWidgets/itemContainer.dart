@@ -41,7 +41,7 @@ class _ItemContainerState extends State<ItemContainer> {
             Row(
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                Text( '25%' +
                   widget.item.off,
                   style: TextStyle(color: AppColor.red),
                 ),

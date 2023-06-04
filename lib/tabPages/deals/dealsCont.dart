@@ -7,23 +7,27 @@ import 'package:testproject/modules/cartListModule.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
 
 
-class DealCount extends StatefulWidget {
+class DealsCont extends StatefulWidget {
   ItemContainerModule item;
   Function()? refresh;
 
 
-  DealCount(
+  DealsCont(
       {Key? key, required this.item,this.refresh}) : super(key: key);
 
   @override
 
-  State<DealCount> createState() => _DealCountState();
+  State<DealsCont> createState() => _DealsContState();
 }
 
-class _DealCountState extends State<DealCount> {
+class _DealsContState extends State<DealsCont> {
+
+  int percentage = 0;
 
 
   Widget build(BuildContext context) {
+    percentage = (((widget.item.oldPrice - widget.item.price) * 100)/widget.item.oldPrice ).toInt() ;
+
     return GestureDetector(
         child: Container(
           decoration: BoxDecoration(
@@ -40,7 +44,7 @@ class _DealCountState extends State<DealCount> {
               Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  Text( '$percentage% ' +
                     widget.item.off,
                     style: TextStyle(color: AppColor.red),
                   ),

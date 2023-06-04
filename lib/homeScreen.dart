@@ -29,7 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: _onWillPop,
+
+      child: Scaffold(
 
         //floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         //floatingActionButton: FloatingActionButton(
@@ -37,66 +40,67 @@ class _HomeScreenState extends State<HomeScreen> {
         //  onPressed: () => _changeLang(),
         //),
 
-        appBar: AppBar(
-          title: Text(
-            "Moone House",
-            style: TextStyle(fontSize: 30, color: Colors.white),
-          ),
-          backgroundColor: Colors.green,
-        ),
-        backgroundColor: AppColor.white,
-        body: Column(
-          children: [
-
-            GlobalVariables.selectedTap == 0? HomePageScreen()
-            : GlobalVariables. selectedTap == 1? DealPageScreen()
-            //: GlobalVariables.selectedTap == 2? CartPage()
-            //: GlobalVariables.selectedTap == 3? BrandPage()
-            :  ProfilePage(),
-
-            Container(
-              height: 100,
-                padding: EdgeInsets.all(AppSize.padding10),
-                color: Colors.grey.withOpacity(0.2),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-
-                      NavigateItem(
-                        navigateItem: 'Home'.tr(),
-                        navigateIcon: Icon(Icons.home_outlined),
-                        pageNumber: 0,
-                        press: () => _press(0),
-                      ),
-                      NavigateItem(
-                        navigateItem: 'Deals'.tr(),
-                        navigateIcon: Icon(Icons.price_check_outlined),
-                        pageNumber: 1,
-                        press: () => _press(1),
-                      ),
-                      NavigateItem(
-                        navigateItem: 'Cart'.tr(),
-                        navigateIcon: Icon(Icons.shopping_bag_outlined),
-                        pageNumber: 2,
-                        press: () => _press(2),
-                      ),
-                      NavigateItem(
-                        navigateItem: 'Brands'.tr(),
-                        navigateIcon: Icon(Icons.shopify_outlined),
-                        pageNumber: 3,
-                        press: () => _press(3),
-                      ),
-                      NavigateItem(
-                        navigateItem: 'Profile'.tr(),
-                        navigateIcon: Icon(Icons.account_circle_outlined),
-                        pageNumber: 4,
-                        press: () => _press(4),
-                      ),
-                    ]
-                )
+          appBar: AppBar(
+            title: Text(
+              "Moone House",
+              style: TextStyle(fontSize: 30, color: Colors.white),
             ),
-          ],
-        ));
+            backgroundColor: Colors.green,
+          ),
+          backgroundColor: AppColor.white,
+          body: Column(
+            children: [
+
+              GlobalVariables.selectedTap == 0 ? HomePageScreen()
+                  : GlobalVariables.selectedTap == 1 ? DealPageScreen()
+              //: GlobalVariables.selectedTap == 2? CartPage()
+              //: GlobalVariables.selectedTap == 3? BrandPage()
+                  : ProfilePage(),
+
+              Container(
+                  height: 100,
+                  padding: EdgeInsets.all(AppSize.padding10),
+                  color: Colors.grey.withOpacity(0.2),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+
+                        NavigateItem(
+                          navigateItem: 'Home'.tr(),
+                          navigateIcon: Icon(Icons.home_outlined),
+                          pageNumber: 0,
+                          press: () => _press(0),
+                        ),
+                        NavigateItem(
+                          navigateItem: 'Deals'.tr(),
+                          navigateIcon: Icon(Icons.price_check_outlined),
+                          pageNumber: 1,
+                          press: () => _press(1),
+                        ),
+                        NavigateItem(
+                          navigateItem: 'Cart'.tr(),
+                          navigateIcon: Icon(Icons.shopping_bag_outlined),
+                          pageNumber: 2,
+                          press: () => _press(2),
+                        ),
+                        NavigateItem(
+                          navigateItem: 'Brands'.tr(),
+                          navigateIcon: Icon(Icons.shopify_outlined),
+                          pageNumber: 3,
+                          press: () => _press(3),
+                        ),
+                        NavigateItem(
+                          navigateItem: 'Profile'.tr(),
+                          navigateIcon: Icon(Icons.account_circle_outlined),
+                          pageNumber: 4,
+                          press: () => _press(4),
+                        ),
+                      ]
+                  )
+              ),
+            ],
+          )),
+    );
   }
 
 
@@ -109,8 +113,14 @@ class _HomeScreenState extends State<HomeScreen> {
   _press(int num) {
     setState(() {
       GlobalVariables.selectedTap = num;
-
     });
   }
 
+  Future<bool> _onWillPop() async {
+    if(GlobalVariables.selectedTap != 0)
+      setState(() {
+        GlobalVariables.selectedTap = 0;
+      });
+     return false;
+  }
 }
