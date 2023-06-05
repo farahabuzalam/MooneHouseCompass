@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
 
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'MooneHouse',
       theme: ThemeData(
         // This is the theme of your application.
         //
