@@ -57,9 +57,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   padding: EdgeInsets.all(AppSize.padding10),
                   children:
                     [
-                      ProfileCont(label: 'Account'.tr(), contIcon: Icon(Icons.account_circle_outlined, color: AppColor.mainColor, size: 30,), press: ()=> null,),
+                      ProfileCont(label: 'Account'.tr(),
+                        contIcon: Icon(Icons.account_circle_outlined,
+                          color: AppColor.mainColor, size: 30,), press: ()=> null,),
                       SizedBox(height: 20),
-                      ProfileCont(label: 'My Orders'.tr(), contIcon: Icon(Icons.shopping_cart_checkout_outlined, color: AppColor.mainColor, size: 30,), press: ()=> null),
+                      ProfileCont(label: 'My Orders'.tr(),
+                          contIcon: Icon(Icons.shopping_cart_checkout_outlined,
+                            color: AppColor.mainColor, size: 30,), press: ()=> null),
                       SizedBox(height: 20),
                       ProfileCont(label: 'Favorites'.tr(), contIcon: Icon(Icons.favorite, color: AppColor.mainColor, size: 30,), press: ()=> null),
                       SizedBox(height: 20),
@@ -86,12 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
         ),
-
-
-
     );
-
-
   }
   Future<void> share() async {
     await FlutterShare.share(
