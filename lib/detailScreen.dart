@@ -125,19 +125,11 @@ class _DetailScreenState extends State<DetailScreen> {
                     )
                 )
               ],
-
-
-
             ),
           ),
-
-
-
-      ],
-    ),
+        ],
+       ),
       ),
-
-
     );
   }
 
@@ -146,10 +138,7 @@ class _DetailScreenState extends State<DetailScreen> {
         text,
         style: TextStyle(fontSize: 20),
         );
-
-
   }
-
   _icon(icon, Function() press) {
     return Container(
       height: 40,

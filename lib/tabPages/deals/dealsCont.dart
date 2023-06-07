@@ -117,7 +117,8 @@ class _DealsContState extends State<DealsCont> {
                         fontSize: 20),
                   )
               ),
-              Text(widget.item.oldPrice.toString(), style: TextStyle(decoration: TextDecoration. lineThrough),),
+              Text(widget.item.oldPrice.toString(),
+                style: TextStyle(decoration: TextDecoration. lineThrough),),
               Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(

@@ -168,7 +168,6 @@ class _ItemContainerState extends State<ItemContainer> {
     });
 
   }
-
   _minimise() {
     setState(() {
       widget.item.count == 1
