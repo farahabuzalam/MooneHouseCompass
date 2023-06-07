@@ -1,15 +1,17 @@
+
 import 'package:flutter/material.dart';
 
-class CartCount extends StatefulWidget {
-  const CartCount({Key? key}) : super(key: key);
+class CartCount{
 
-  @override
-  State<CartCount> createState() => _CartCountState();
-}
+  String   image, wight, name;
+  int? count;
+  double price;
 
-class _CartCountState extends State<CartCount> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
+  CartCount({
+    required this.name,
+    required this.wight,
+    this.count,
+    required this.image,
+    required this.price
+  });
 }

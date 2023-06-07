@@ -21,5 +21,7 @@ class ItemContainerModule{
     this.origin,
     required this.isDeal,
     required this.oldPrice
+
   });
+
 }

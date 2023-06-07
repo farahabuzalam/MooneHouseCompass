@@ -24,10 +24,33 @@ class CartPage extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: new Container(
+        color: Colors.white54,
+        child: Row(
+          children: <Widget>[
+            Expanded(child: ListTile(
+              title: new Text('Total:'),
+              subtitle: new Text (''),
+            )),
+            Expanded(
+
+                child:Container (
+            decoration: new BoxDecoration(shape: BoxShape.rectangle,
+            color: Colors.green,
+            border: Border.all(color:Colors.green ),
+
+            ),
+             child:new MaterialButton(onPressed: (){},
+            child: new Text("Continue to payment",  style: TextStyle(color:Colors.white ),),
+             )
+                ) ,
+            )
+          ],
+        ),
+      ),
        body: Column(
          children: [
            Expanded(child: ListView.builder(
-               itemCount: ItemContainer(item: item),
                itemBuilder: (context,index){
              return Card(
                child: Column(
@@ -40,6 +63,13 @@ class CartPage extends StatefulWidget {
                        image: NetworkImage(cartList[index].toString()),
                      ),
                    ],),
+
+                   Column(
+                     children: [
+
+                     ],
+                   ),
+
                  ],
                ),
              );

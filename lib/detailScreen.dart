@@ -50,6 +50,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               child: Image.network(widget.item.image)
                           ),
                         ),
+
                           Align(
                               alignment: Alignment.topRight,
                               child: Container (
