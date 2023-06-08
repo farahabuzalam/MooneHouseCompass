@@ -17,10 +17,18 @@ class CartPage extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: ListView(
-      children:
-      GlobalVariables.cartList.map((e) => CartCount(item: e.item, refresh: ()=> _setState() )).toList()
-    )
+      child: Column(
+        children: [
+          Text('Your cart', style: TextStyle(fontSize: 20),),
+          Expanded(
+            child: 
+            ListView(
+           children:
+          GlobalVariables.cartList.map((e) => CartCount(item: e.item, refresh: ()=> _setState() )).toList()
+        )
+        ),
+        ]
+      ),
     );
 
 

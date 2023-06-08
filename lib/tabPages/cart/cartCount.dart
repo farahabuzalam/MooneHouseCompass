@@ -25,63 +25,72 @@ class _CartCountState extends State<CartCount> {
   {
     double totalPrice = widget.item.price;
 
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.network(
-            widget.item.image,
-            fit: BoxFit.cover,
-            height: 70,
-            width: 70
-          ),
-          Column(
-              children: [
-                Text(
-                  '${widget.item.name},\n ${widget.item.price}',
-                  style: TextStyle(color: AppColor.black, fontSize: 16),
-                )
-              ]
+    return Expanded(
+      child:
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          padding: EdgeInsets.all(AppSize.padding10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.network(
+                widget.item.image,
+                fit: BoxFit.cover,
+                height: 70,
+                width: 70
+              ),
+              SizedBox(width: 10,),
+              Column(
+                  children: [
+                    Text(
+                      '${widget.item.name},\n ${widget.item.price}',
+                      style: TextStyle(color: AppColor.black, fontSize: 16),
+                      softWrap: true,
+                    )
+                  ]
 
-          ),
-          Column(
-            children: [ Row(
-              children: [
-                widget.item.count == null
-                    ? SizedBox()
-                    : _icon(Icons.remove, () => _minimise()),
-                widget.item.count == null
-                    ? SizedBox()
-                    : Text(
-                  widget.item.count.toString(),
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: AppColor.red,
-                      backgroundColor:
-                      AppColor.white.withOpacity(0.3)),
-                ),
-                _icon(Icons.add, () => _add()),
+              ),
+               Column(
 
-                Text(
-                  '${totalPrice = totalPrice * widget.item.count!}',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: AppColor.black,
-                      backgroundColor: Colors.grey.shade100,
-                      fontSize: 16),
+                  children: [
+                    Row(
+                      children: [
+                        widget.item.count == null
+                            ? SizedBox()
+                            : _icon(Icons.remove, () => _minimise()),
+                        widget.item.count == null
+                            ? SizedBox()
+                            : Text(
+                          widget.item.count.toString(),
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: AppColor.red,
+                              backgroundColor:
+                              AppColor.white.withOpacity(0.3)),
+                        ),
+                        _icon(Icons.add, () => _add()),
+                      ],
+                    ),
+                    Text(
+                      '${totalPrice = totalPrice * widget.item.count!}',
+                      style: TextStyle(
+                          color: AppColor.black,
+                          backgroundColor: Colors.grey.shade100,
+                          fontSize: 16),
+                    ),
+                  ],
                 ),
-                IconButton(
+               IconButton(
                   icon: Icon(Icons.delete_outlined),
                   onPressed: ()=>  {
-                  GlobalVariables.cartList.removeWhere((element) => element.item == widget.item),
-                  widget.refresh!(),
+                    GlobalVariables.cartList.removeWhere((element) => element.item == widget.item),
+                    widget.refresh!(),
                   }
-                ),
-              ],
-            ),
+              ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

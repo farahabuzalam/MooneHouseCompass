@@ -139,8 +139,8 @@ class _DealsContState extends State<DealsCont> {
 
   _icon(icon, Function() press) {
     return Container(
-      height: 40,
-      width: 40,
+      height: 27,
+      width: 27,
       margin: EdgeInsets.symmetric(horizontal: AppSize.margin20),
       decoration:
       BoxDecoration(shape: BoxShape.circle, color: AppColor.mainColor),
@@ -149,7 +149,7 @@ class _DealsContState extends State<DealsCont> {
         icon: Icon(
           icon,
           color: AppColor.white,
-          size: 25,
+          size: 13,
         ),
       ),
     );
