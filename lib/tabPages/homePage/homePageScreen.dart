@@ -10,7 +10,8 @@ import 'package:testproject/productScreen.dart';
 import 'package:testproject/sharedWidgets/itemContainer.dart';
 
 class HomePageScreen extends StatefulWidget {
-  const HomePageScreen({Key? key}) : super(key: key);
+  Function() refresh;
+   HomePageScreen({Key? key,required this.refresh}) : super(key: key);
 
   @override
   State<HomePageScreen> createState() => _HomePageScreenState();
@@ -242,17 +243,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
     });
   }
 
-  _setState() {
-    setState(() {
 
-    });
-  }
+
 
     _horizontalList(List<ItemContainerModule> list) {
       return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: list.map((e) => ItemContainer(item: e, refresh: ()=> _setState())).toList(),
+          children: list.map((e) => ItemContainer(item: e, refresh: ()=> widget.refresh())).toList(),
         ),
       );
     }

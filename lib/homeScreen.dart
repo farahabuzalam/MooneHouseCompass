@@ -53,9 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
           body: Column(
             children: [
 
-              GlobalVariables.selectedTap == 0 ? HomePageScreen()
-                  : GlobalVariables.selectedTap == 1 ? DealPageScreen()
-                  : GlobalVariables.selectedTap == 2? CartPage()
+              GlobalVariables.selectedTap == 0 ? HomePageScreen(refresh:()=> _setState())
+                  : GlobalVariables.selectedTap == 1 ? DealPageScreen(refresh: ()=> _setState())
+                  : GlobalVariables.selectedTap == 2 && GlobalVariables.cartList.length>0? CartPage()
               //: GlobalVariables.selectedTap == 3? BrandPage()
                   : ProfilePage(),
 
@@ -105,6 +105,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  _setState() {
+    setState(() {
+
+    });
+  }
 
   _changeLang() {
     context.locale == Locale('en')

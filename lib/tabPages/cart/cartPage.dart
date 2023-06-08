@@ -19,9 +19,15 @@ class CartPage extends StatefulWidget {
     return Expanded(
         child: ListView(
       children:
-      GlobalVariables.cartList.map((e) => CartCount(item: e.item)).toList()
+      GlobalVariables.cartList.map((e) => CartCount(item: e.item, refresh: ()=> _setState() )).toList()
     )
     );
 
+
+  }
+  _setState() {
+    setState(() {
+
+    });
   }
  }

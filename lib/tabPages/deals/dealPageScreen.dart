@@ -6,7 +6,9 @@ import 'package:testproject/tabPages/deals/dealsCont.dart';
 
 
 class DealPageScreen extends StatefulWidget {
-  const DealPageScreen({Key? key}) : super(key: key);
+  Function() refresh;
+
+   DealPageScreen({Key? key, required this.refresh}) : super(key: key);
 
   @override
   State<DealPageScreen> createState() => _DealPageScreen();

@@ -11,7 +11,7 @@ class CartCount extends StatefulWidget {
   ItemContainerModule item;
   Function()? refresh;
 
-   CartCount({Key? key, required this.item}) : super(key: key);
+   CartCount({Key? key, required this.item, this.refresh}) : super(key: key);
 
   @override
   State<CartCount> createState() => _CartCountState();
@@ -19,22 +19,27 @@ class CartCount extends StatefulWidget {
 
 class _CartCountState extends State<CartCount> {
 
-  @override
 
-  Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context)
+  {
+    double totalPrice = widget.item.price;
+
     return Container(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.network(
             widget.item.image,
             fit: BoxFit.cover,
-            height: AppSize.itemImageHight,
+            height: 70,
+            width: 70
           ),
           Column(
               children: [
                 Text(
                   '${widget.item.name},\n ${widget.item.price}',
-                  style: TextStyle(color: AppColor.black, fontSize: 15),
+                  style: TextStyle(color: AppColor.black, fontSize: 16),
                 )
               ]
 
@@ -58,16 +63,19 @@ class _CartCountState extends State<CartCount> {
                 _icon(Icons.add, () => _add()),
 
                 Text(
-                  '${widget.item.price}',
+                  '${totalPrice = totalPrice * widget.item.count!}',
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: AppColor.black,
-                      backgroundColor: Colors.grey,
-                      fontSize: 20),
+                      backgroundColor: Colors.grey.shade100,
+                      fontSize: 16),
                 ),
                 IconButton(
                   icon: Icon(Icons.delete_outlined),
-                  onPressed: ()=> GlobalVariables.cartList.removeWhere((element) => element.item == widget.item),
+                  onPressed: ()=>  {
+                  GlobalVariables.cartList.removeWhere((element) => element.item == widget.item),
+                  widget.refresh!(),
+                  }
                 ),
               ],
             ),
@@ -85,8 +93,8 @@ class _CartCountState extends State<CartCount> {
   }
   _icon(icon, Function() press) {
     return Container(
-      height: 40,
-      width: 40,
+      height: 25,
+      width: 25,
       margin: EdgeInsets.symmetric(horizontal: AppSize.margin20),
       decoration:
       BoxDecoration(shape: BoxShape.circle, color: AppColor.mainColor),
@@ -95,7 +103,7 @@ class _CartCountState extends State<CartCount> {
         icon: Icon(
           icon,
           color: AppColor.white,
-          size: 25,
+          size: 10,
         ),
       ),
     );
@@ -115,6 +123,8 @@ class _CartCountState extends State<CartCount> {
       }
       if (!update)
         GlobalVariables.cartList.add(CartListModule(item: widget.item));
+
+
 
     });
     widget.refresh!();
