@@ -1,17 +1,29 @@
 
 import 'package:flutter/material.dart';
+import 'package:testproject/modules/cartListModule.dart';
 
-class CartCount{
+import '../../modules/itemContainerModule.dart';
+class CartCount extends StatefulWidget {
 
-  String   image, wight, name;
-  int? count;
-  double price;
+  ItemContainerModule item;
 
-  CartCount({
-    required this.name,
-    required this.wight,
-    this.count,
-    required this.image,
-    required this.price
-  });
+   CartCount({Key? key, required this.item}) : super(key: key);
+
+  @override
+  State<CartCount> createState() => _CartCountState();
+}
+
+class _CartCountState extends State<CartCount> {
+
+  @override
+
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+
+        ],
+      ),
+    );
+  }
 }

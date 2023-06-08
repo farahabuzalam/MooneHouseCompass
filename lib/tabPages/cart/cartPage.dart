@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/navigateItem.dart';
 import 'package:testproject/sharedWidgets/itemContainer.dart';
+import 'package:testproject/tabPages/cart/cartCount.dart';
 
 import '../../constants/appsize.dart';
 import '../../globalVariables.dart';
@@ -10,6 +11,7 @@ import '../../modules/cartListModule.dart';
 import '../../modules/itemContainerModule.dart';
 
 class CartPage extends StatefulWidget {
+
   ItemContainerModule item;
   Function()? refresh;
 
@@ -25,6 +27,8 @@ class CartPage extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     //print(GlobalVariables.cartList[0].item);
+    GlobalVariables.cartList.map((e) => CartCount(item: e.item)).toList();
+
     return Expanded(child:  Container (
           child: Row(
             children: [
