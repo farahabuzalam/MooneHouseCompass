@@ -47,7 +47,7 @@ class _CartCountState extends State<CartCount> {
                       '${widget.item.name},\n ${widget.item.price}',
                       style: TextStyle(color: AppColor.black, fontSize: 16),
                       softWrap: true,
-                    )
+                    ),
                   ]
 
               ),
@@ -133,10 +133,12 @@ class _CartCountState extends State<CartCount> {
       if (!update)
         GlobalVariables.cartList.add(CartListModule(item: widget.item));
 
+      GlobalVariables.grandTotal = GlobalVariables.grandTotal + widget.item.price;
+      widget.refresh!();
 
 
     });
-    widget.refresh!();
+
   }
 
   _minimise() {
@@ -145,14 +147,18 @@ class _CartCountState extends State<CartCount> {
           ? widget.item.count = null
           : widget.item.count = (widget.item.count! -1);
       //print(widget.item.count.toString());
-
+      GlobalVariables.grandTotal = GlobalVariables.grandTotal - widget.item.price;
       bool update = false;
 
       if(widget.item.count == null) {
         GlobalVariables.cartList.removeWhere((element) => element.item == widget.item);
         print(GlobalVariables.cartList.length.toString());
+
         widget.refresh!();
       }
+
+
+
     });
   }
 }

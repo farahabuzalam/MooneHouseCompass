@@ -163,6 +163,7 @@ class _ItemContainerState extends State<ItemContainer> {
       if (!update)
       GlobalVariables.cartList.add(CartListModule(item: widget.item));
 
+      GlobalVariables.grandTotal = GlobalVariables.grandTotal + widget.item.price;
       widget.refresh!();
 
     });
@@ -174,12 +175,13 @@ class _ItemContainerState extends State<ItemContainer> {
           ? widget.item.count = null
           : widget.item.count = (widget.item.count! - 1);
       //print(widget.item.count.toString());
-
+      GlobalVariables.grandTotal = GlobalVariables.grandTotal - widget.item.price;
       bool update = false;
 
       if(widget.item.count == null) {
         GlobalVariables.cartList.removeWhere((element) => element.item == widget.item);
         print(GlobalVariables.cartList.length.toString());
+
         widget.refresh!();
       }
 

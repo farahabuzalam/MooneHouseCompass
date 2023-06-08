@@ -4,8 +4,9 @@ import '../../globalVariables.dart';
 
 
 class CartPage extends StatefulWidget {
+  Function() refresh;
 
-   CartPage({Key? key,}) : super(key: key);
+   CartPage({Key? key, required this.refresh}) : super(key: key);
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -19,7 +20,15 @@ class CartPage extends StatefulWidget {
     return Expanded(
       child: Column(
         children: [
-          Text('Your cart', style: TextStyle(fontSize: 20),),
+          Row(
+            children:
+            [
+              Text('Your cart', style: TextStyle(fontSize: 20),),
+              Spacer(),
+              Text('items: '+ GlobalVariables.cartList.length.toString(), style: TextStyle(fontSize: 20),),
+            ]
+            ),
+
           Expanded(
             child: 
             ListView(
@@ -27,6 +36,22 @@ class CartPage extends StatefulWidget {
           GlobalVariables.cartList.map((e) => CartCount(item: e.item, refresh: ()=> _setState() )).toList()
         )
         ),
+
+          Container(
+            child: Column(
+              children: [
+
+                Row(children: [
+                  Text('Grand Total', style: TextStyle(fontSize: 20)),
+                  Spacer(),
+                  Text(GlobalVariables.grandTotal.toString(), style: TextStyle(fontSize: 20),)
+                ],
+                )
+              ]
+            )
+
+          )
+
         ]
       ),
     );

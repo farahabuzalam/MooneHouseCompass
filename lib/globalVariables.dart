@@ -4,5 +4,6 @@ import 'package:testproject/modules/cartListModule.dart';
 class GlobalVariables {
   static int selectedTap = 0;
   static List <CartListModule> cartList = [];
+  static double grandTotal = 0;
 
 }
