@@ -14,12 +14,20 @@ class CartPage extends StatefulWidget {
 
   class _CartPageState extends State<CartPage> {
 
+   _calculatTotal(){
+     var total = 0.0;
+    GlobalVariables.cartList.forEach((element) {
+      total += element.item.price * element.item.count!;
+    });
+    return total;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
         children: [
+
           Row(
             children:
             [
@@ -29,8 +37,8 @@ class CartPage extends StatefulWidget {
             ]
             ),
 
-          Expanded(
-            child: 
+          Flexible(
+            child:
             ListView(
            children:
           GlobalVariables.cartList.map((e) => CartCount(item: e.item, refresh: ()=> _setState() )).toList()
@@ -40,17 +48,17 @@ class CartPage extends StatefulWidget {
           Container(
             child: Column(
               children: [
-
                 Row(children: [
                   Text('Grand Total', style: TextStyle(fontSize: 20)),
                   Spacer(),
-                  Text(GlobalVariables.grandTotal.toString(), style: TextStyle(fontSize: 20),)
+                  Text(_calculatTotal().toString(), style: TextStyle(fontSize: 20),)
                 ],
                 )
               ]
             )
 
           )
+
 
         ]
       ),

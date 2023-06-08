@@ -23,6 +23,17 @@ class ItemContainer extends StatefulWidget {
 }
 
 class _ItemContainerState extends State<ItemContainer> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    for(var v in GlobalVariables.cartList){
+      if(widget.item .name == v.item.name)
+        widget.item.count = v.item.count;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -155,7 +166,7 @@ class _ItemContainerState extends State<ItemContainer> {
       bool update = false;
       for(var c in GlobalVariables.cartList)
         {
-          if(c.item == widget.item)
+          if(c.item.name == widget.item.name)
             update = true;
 
 
@@ -163,7 +174,6 @@ class _ItemContainerState extends State<ItemContainer> {
       if (!update)
       GlobalVariables.cartList.add(CartListModule(item: widget.item));
 
-      GlobalVariables.grandTotal = GlobalVariables.grandTotal + widget.item.price;
       widget.refresh!();
 
     });
@@ -175,7 +185,6 @@ class _ItemContainerState extends State<ItemContainer> {
           ? widget.item.count = null
           : widget.item.count = (widget.item.count! - 1);
       //print(widget.item.count.toString());
-      GlobalVariables.grandTotal = GlobalVariables.grandTotal - widget.item.price;
       bool update = false;
 
       if(widget.item.count == null) {

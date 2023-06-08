@@ -24,24 +24,24 @@ class _CartCountState extends State<CartCount> {
   Widget build(BuildContext context)
   {
     double totalPrice = widget.item.price;
-
     return Expanded(
       child:
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          padding: EdgeInsets.all(AppSize.padding10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.network(
+      Container(
+        padding: EdgeInsets.all(AppSize.padding10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              flex: 2,
+              child: Image.network(
                 widget.item.image,
                 fit: BoxFit.cover,
-                height: 70,
-                width: 70
               ),
-              SizedBox(width: 10,),
-              Column(
+            ),
+
+            Flexible(
+              flex: 2,
+              child: Column(
                   children: [
                     Text(
                       '${widget.item.name},\n ${widget.item.price}',
@@ -51,8 +51,10 @@ class _CartCountState extends State<CartCount> {
                   ]
 
               ),
-               Column(
-
+            ),
+             Flexible(
+               flex: 3,
+               child: Column(
                   children: [
                     Row(
                       children: [
@@ -79,17 +81,17 @@ class _CartCountState extends State<CartCount> {
                           backgroundColor: Colors.grey.shade100,
                           fontSize: 16),
                     ),
-                  ],
+                    IconButton(
+                        icon: Icon(Icons.delete_outlined),
+                        onPressed: ()=>  {
+                          GlobalVariables.cartList.removeWhere((element) => element.item == widget.item),
+                          widget.refresh!(),
+                        }
+                    ),      ],
                 ),
-               IconButton(
-                  icon: Icon(Icons.delete_outlined),
-                  onPressed: ()=>  {
-                    GlobalVariables.cartList.removeWhere((element) => element.item == widget.item),
-                    widget.refresh!(),
-                  }
-              ),
-            ],
-          ),
+             ),
+
+          ],
         ),
       ),
     );
@@ -133,7 +135,6 @@ class _CartCountState extends State<CartCount> {
       if (!update)
         GlobalVariables.cartList.add(CartListModule(item: widget.item));
 
-      GlobalVariables.grandTotal = GlobalVariables.grandTotal + widget.item.price;
       widget.refresh!();
 
 
@@ -147,18 +148,19 @@ class _CartCountState extends State<CartCount> {
           ? widget.item.count = null
           : widget.item.count = (widget.item.count! -1);
       //print(widget.item.count.toString());
-      GlobalVariables.grandTotal = GlobalVariables.grandTotal - widget.item.price;
+
       bool update = false;
 
       if(widget.item.count == null) {
         GlobalVariables.cartList.removeWhere((element) => element.item == widget.item);
         print(GlobalVariables.cartList.length.toString());
 
-        widget.refresh!();
-      }
 
+      }
+      widget.refresh!();
 
 
     });
   }
 }
+

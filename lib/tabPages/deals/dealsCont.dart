@@ -172,7 +172,6 @@ class _DealsContState extends State<DealsCont> {
 
     });
 
-    GlobalVariables.grandTotal = GlobalVariables.grandTotal + widget.item.price;
     widget.refresh!();
   }
 
@@ -184,7 +183,6 @@ class _DealsContState extends State<DealsCont> {
       //print(widget.item.count.toString());
 
       bool update = false;
-      GlobalVariables.grandTotal = GlobalVariables.grandTotal - widget.item.price;
       if(widget.item.count == null) {
         GlobalVariables.cartList.removeWhere((element) => element.item == widget.item);
         print(GlobalVariables.cartList.length.toString());
