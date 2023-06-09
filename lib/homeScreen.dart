@@ -9,6 +9,7 @@ import 'package:testproject/navigateItem.dart';
 import 'package:testproject/productScreen.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
 import 'package:testproject/tabPages/cart/cartPage.dart';
+import 'package:testproject/tabPages/cart/emptyCart.dart';
 import 'package:testproject/tabPages/deals/dealPageScreen.dart';
 import 'package:testproject/tabPages/homePage/homePageScreen.dart';
 import 'package:testproject/tabPages/profile/profilePage.dart';
@@ -56,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
               GlobalVariables.selectedTap == 0 ? HomePageScreen(refresh:()=> _setState())
                   : GlobalVariables.selectedTap == 1 ? DealPageScreen(refresh: ()=> _setState())
                   : GlobalVariables.selectedTap == 2 && GlobalVariables.cartList.length>0? CartPage(refresh: ()=> _setState())
+                  : GlobalVariables.selectedTap == 2 && GlobalVariables.cartList.length==0? EmptyCart(refresh: ()=> _setState())
               //: GlobalVariables.selectedTap == 3? BrandPage()
                   : ProfilePage(),
 
