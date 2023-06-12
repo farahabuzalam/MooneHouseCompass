@@ -15,6 +15,7 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   @override
+
   _calculatTotal() {
     double total = 0;
 
@@ -22,11 +23,24 @@ class _CartPageState extends State<CartPage> {
       total += element.item.price * element.item.count!;
     });
 
-    return total;
+
+    int discountPerc = _applyCode();
+    if (_validate)
+      return total - (discountPerc*total)/100;
+    else
+      return total;
   }
 
   final myController = TextEditingController();
+
+  List<PromoCode> promoCodes = [
+    PromoCode(code: 'souha', perc: 10),
+    PromoCode(code: 'anan', perc: 20),
+    PromoCode(code: 'farah', perc: 30),
+  ];
+
   String _code = 'sofan3';
+
   bool _validate = false;
 
   @override
@@ -89,10 +103,7 @@ class _CartPageState extends State<CartPage> {
             children: [
               Text('Grand Total', style: TextStyle(fontSize: 20)),
               Spacer(),
-              Text(
-                _validate
-                    ? _calculateTotalPromo().toString()
-                    : _calculatTotal().toString(),
+              Text(_calculatTotal().toString(),
                 style: TextStyle(fontSize: 20),
               )
             ],
@@ -106,21 +117,29 @@ class _CartPageState extends State<CartPage> {
     setState(() {});
   }
 
-  _applyCode() {
+    int _applyCode() {
+    int perc = 0;
     setState(() {
-      myController.text == _code ? _validate = true : _validate = false;
-    });
+      for (PromoCode element in promoCodes) {
+        if(myController.text == element.code)
+        {
+          _validate = true;
+          perc = element.perc;
+          break;
+        }
 
-    widget.refresh();
+      };
+      //myController.text == _code ? _validate = true : _validate = false;
+    });
+    return perc;
   }
 
-  _calculateTotalPromo() {
-    double total = 0;
 
-    GlobalVariables.cartList.forEach((element) {
-      total += element.item.price * element.item.count!;
-    });
+}
 
-    return total - 0.1 * total;
-  }
+class PromoCode{
+  String code;
+  int perc;
+
+  PromoCode({required this.code, required this.perc});
 }
