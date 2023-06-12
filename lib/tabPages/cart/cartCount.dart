@@ -27,7 +27,12 @@ class _CartCountState extends State<CartCount> {
     return Expanded(
       child:
       Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColor.mainColor),
+              borderRadius: BorderRadius.all(Radius.circular(AppSize.curve)),
+        ),
         padding: EdgeInsets.all(AppSize.padding10),
+        margin: EdgeInsets.all(10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

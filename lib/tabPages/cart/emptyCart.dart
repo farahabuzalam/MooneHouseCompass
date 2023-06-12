@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/globalVariables.dart';
 import 'package:testproject/homeScreen.dart';
-import 'package:testproject/tabPages/homePage/homePageScreen.dart';
 
 class EmptyCart extends StatefulWidget {
   Function () refresh;

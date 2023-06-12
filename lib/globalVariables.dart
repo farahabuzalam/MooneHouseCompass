@@ -5,4 +5,5 @@ class GlobalVariables {
   static int selectedTap = 0;
   static List <CartListModule> cartList = [];
 
+
 }
