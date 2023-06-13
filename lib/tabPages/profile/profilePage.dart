@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
+import 'package:testproject/loginPage.dart';
 import 'package:testproject/tabPages/profile/profileCont.dart';
 import 'package:flutter_share/flutter_share.dart';
 
@@ -39,7 +40,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: EdgeInsets.all(AppSize.padding10),
                 child: Row(
                   children: [
-                    Spacer(), Container(
+                    Spacer(),
+                    Container(
                       decoration: BoxDecoration(shape: BoxShape.circle,
                       color: AppColor.white,
                       border: Border.all(color: AppColor.white ) ),
@@ -59,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     [
                       ProfileCont(label: 'Account'.tr(),
                         contIcon: Icon(Icons.account_circle_outlined,
-                          color: AppColor.mainColor, size: 30,), press: ()=> null,),
+                          color: AppColor.mainColor, size: 30,), press: ()=> _login(),),
                       SizedBox(height: 20),
                       ProfileCont(label: 'My Orders'.tr(),
                           contIcon: Icon(Icons.shopping_cart_checkout_outlined,
@@ -92,11 +94,19 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
     );
   }
+
+
   Future<void> share() async {
     await FlutterShare.share(
       title: 'Example share',
       text: 'Example share text',
       //chooserTitle: 'Example Chooser Title'
     );
+  }
+
+  _login(){
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) =>  LoginPage()));
   }
 }
