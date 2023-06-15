@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
+import 'package:testproject/globalVariables.dart';
 import 'package:testproject/loginPage.dart';
 import 'package:testproject/tabPages/profile/profileCont.dart';
 import 'package:flutter_share/flutter_share.dart';
@@ -81,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       SizedBox(height: 20),
                       ProfileCont(label: 'Contact Us'.tr(), contIcon: Icon(Icons.phone, color: AppColor.mainColor, size: 30,), press: ()=> null),
                       SizedBox(height: 20),
-                      ProfileCont(label: 'Login'.tr(), contIcon: Icon(Icons.power_settings_new_outlined, color: AppColor.mainColor, size: 30,), press: ()=> null),
+                      ProfileCont(label:GlobalVariables.person == null? 'Login'.tr(): 'Logout'.tr(), contIcon: Icon(Icons.power_settings_new_outlined, color: AppColor.mainColor, size: 30,), press: ()=> null),
                       SizedBox(height: 20),
                       ProfileCont(label: context.locale == Locale('en') ? "عربي" : "English", contIcon: Icon(Icons.language_outlined, color: AppColor.mainColor, size: 30,), press: ()=> _changeLang()),
                       SizedBox(height: 20),
