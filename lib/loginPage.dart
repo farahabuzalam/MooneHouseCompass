@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:testproject/storeData/addPerson.dart';
+
+import 'storeData/PersonModule.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -136,6 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   width: 400,
                   child: TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -161,13 +165,13 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 TextButton(
-                    onPressed: ()=> null,
+                    onPressed: ()=> _login(),
                     style: TextButton.styleFrom(backgroundColor: AppColor.mainColor),
                     child: Text('Login',
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.white),
-                    )
+                    ),
                 ),
                 SizedBox(
                   height: 20,
@@ -218,6 +222,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  TextEditingController _emailController = TextEditingController();
   _byPhone() {
     return Material(
       color: AppColor.white,
@@ -260,5 +265,15 @@ class _LoginPageState extends State<LoginPage> {
             )
       ]),
     );
+  }
+
+  _login() {
+    var person = Person()
+      ..name = 'Anan'
+      ..email = _emailController.text
+      ..city = 'Dubai'
+      ..phone = '0554455445';
+
+    AddPerson(person).add();
   }
 }

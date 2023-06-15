@@ -1,13 +1,32 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:testproject/constants/appStrings.dart';
+import 'package:testproject/globalVariables.dart';
 import 'package:testproject/homeScreen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:testproject/storeData/PersonModule.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  var path = (await getApplicationDocumentsDirectory()).path;
+
+  if (!Hive.isBoxOpen(AppStrings.personBox)) Hive.init(path);
+  if (!Hive.isAdapterRegistered(0)) Hive.registerAdapter(PersonAdapter());
+  Box p = await Hive.openBox(AppStrings.personBox);
+  if(p.length>0){
+    print(p.getAt(0));
+    GlobalVariables.person = p.getAt(0);
+  }
+
+
 
   runApp(
     EasyLocalization(
@@ -18,10 +37,14 @@ void main() async {
         child: MyApp()
     ),
   );
+  /* Hive Init */
+
 }
 
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp();
+
 
   // This widget is the root of your application.
   @override
