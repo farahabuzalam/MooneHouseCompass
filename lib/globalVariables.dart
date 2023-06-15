@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:testproject/modules/cartListModule.dart';
-import 'package:testproject/storeData/PersonModule.dart';
+import 'package:testproject/modules/person.dart';
+import 'package:testproject/storeData/myBoxes.dart';
 
 class GlobalVariables {
   static int selectedTap = 0;

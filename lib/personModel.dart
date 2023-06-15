@@ -1,7 +1,6 @@
-
 import 'package:hive/hive.dart';
 
-
+part 'PersonModel.g.dart';
 
 @HiveType(typeId: 1)
 class PersonModel{
