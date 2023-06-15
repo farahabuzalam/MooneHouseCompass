@@ -6,7 +6,7 @@ import 'package:testproject/constants/appStrings.dart';
 import 'package:testproject/globalVariables.dart';
 import 'package:testproject/homeScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:testproject/storeData/myBoxes.dart';
+import 'package:testproject/storeData/PersonModule.dart';
 
 
 void main() async {
@@ -23,17 +23,11 @@ void main() async {
     Hive.registerAdapter(PersonAdapter());
 
   Box p = await Hive.openBox(AppStrings.personBox);
-  try{
+
     if (p.length > 0) {
-      MyBoxes box =p.getAt(0);
       print(p.getAt(0));
-      GlobalVariables.person = box.person;
-      GlobalVariables.cartList = box.cartList;
+      GlobalVariables.person = p.getAt(0);
     }
-
-  }catch(e){
-
-  }
 
   runApp(
     EasyLocalization(

@@ -3,7 +3,6 @@ import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:testproject/modules/person.dart';
-import 'package:testproject/storeData/myBoxes.dart';
 import 'package:testproject/storeData/addPerson.dart';
 
 class LoginPage extends StatefulWidget {
