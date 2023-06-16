@@ -64,6 +64,8 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                           SizedBox(
                             height: 25,
                           ),
+
+
                       Text('Name'),
 
                       SizedBox(
@@ -82,8 +84,85 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                         ),
                       ),
 
+                          SizedBox(
+                            height: 25,
+                          ),
 
-                      SizedBox(height: 30),
+
+                          Text('Email'),
+
+                          SizedBox(
+                            width: 400,
+                            child: Material(
+                              color: AppColor.white,
+                              child: TextField(
+                                controller: TextEditingController(text: GlobalVariables.person!.email),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(20))),
+
+                                  icon: Icon(Icons.email_outlined),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 25,
+                          ),
+
+
+                          Text('Phone Number'),
+
+                          SizedBox(
+                            width: 400,
+                            child: Material(
+                              color: AppColor.white,
+                              child: TextField(
+                                controller: TextEditingController(text: GlobalVariables.person!.phone),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(20))),
+
+                                  icon: Icon(Icons.phone_outlined),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 25,
+                          ),
+
+
+
+                          Text('City'),
+
+                          SizedBox(
+                            width: 400,
+                            child: Material(
+                              color: AppColor.white,
+                              child: TextField(
+                                controller: TextEditingController(text: GlobalVariables.person!.city),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(20))),
+
+                                  icon: Icon(Icons.location_city_outlined),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 25,
+                          ),
+
+
+
+
+
+                          SizedBox(height: 30),
 
 
                     ]

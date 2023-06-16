@@ -3,6 +3,7 @@ import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/detailScreen.dart';
 import 'package:testproject/globalVariables.dart';
+import 'package:testproject/loginPage.dart';
 import 'package:testproject/modules/cartListModule.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
 
@@ -157,26 +158,37 @@ class _ItemContainerState extends State<ItemContainer> {
   }
 
   _add() {
-    setState(() {
-      widget.item.count == null
-          ? widget.item.count = 1
-          : widget.item.count = (widget.item.count! + 1);
-      print(widget.item.count.toString());
+    if (GlobalVariables.person == null) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage())).then((value) =>
+          setState(() {}));
+    }else{
 
-      bool update = false;
-      for(var c in GlobalVariables.cartList)
+      setState(() {
+        widget.item.count == null
+            ? widget.item.count = 1
+            : widget.item.count = (widget.item.count! + 1);
+        print(widget.item.count.toString());
+
+        bool update = false;
+        for(var c in GlobalVariables.cartList)
         {
           if(c.item.name == widget.item.name)
             update = true;
 
 
         }
-      if (!update)
-      GlobalVariables.cartList.add(CartListModule(item: widget.item));
+        if (!update)
+          GlobalVariables.cartList.add(CartListModule(item: widget.item));
 
-      widget.refresh!();
+        widget.refresh!();
 
-    });
+      });
+    }
+
+
+
 
   }
   _minimise() {

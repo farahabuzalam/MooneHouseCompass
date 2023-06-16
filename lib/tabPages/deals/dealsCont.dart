@@ -3,6 +3,7 @@ import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/detailScreen.dart';
 import 'package:testproject/globalVariables.dart';
+import 'package:testproject/loginPage.dart';
 import 'package:testproject/modules/cartListModule.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
 
@@ -26,7 +27,8 @@ class _DealsContState extends State<DealsCont> {
 
 
   Widget build(BuildContext context) {
-    percentage = (((widget.item.oldPrice - widget.item.price) * 100)/widget.item.oldPrice ).toInt() ;
+    percentage = (((widget.item.oldPrice - widget.item.price) * 100) /
+        widget.item.oldPrice).toInt();
 
     return GestureDetector(
         child: Container(
@@ -44,8 +46,8 @@ class _DealsContState extends State<DealsCont> {
               Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text( '$percentage% ' +
-                    widget.item.off,
+                  Text('$percentage% ' +
+                      widget.item.off,
                     style: TextStyle(color: AppColor.red),
                   ),
                   Spacer(),
@@ -118,7 +120,7 @@ class _DealsContState extends State<DealsCont> {
                   )
               ),
               Text(widget.item.oldPrice.toString(),
-                style: TextStyle(decoration: TextDecoration. lineThrough),),
+                style: TextStyle(decoration: TextDecoration.lineThrough),),
               Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
@@ -133,7 +135,10 @@ class _DealsContState extends State<DealsCont> {
               context,
               MaterialPageRoute(
                   builder: (context) => DetailScreen(item: widget.item)),
-            ).then((value) => setState(() {widget.refresh!();}))
+            ).then((value) =>
+                setState(() {
+                  widget.refresh!();
+                }))
     );
   }
 
@@ -156,41 +161,48 @@ class _DealsContState extends State<DealsCont> {
   }
 
   _add() {
-    setState(() {
-      widget.item.count == null
-          ? widget.item.count = 1
-          : widget.item.count = (widget.item!.count! + 1);
-      print(widget.item.count.toString());
+    if (GlobalVariables.person == null) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage())).then((value) =>
+          setState(() {}));
+    } else {
+      setState(() {
+        widget.item.count == null
+            ? widget.item.count = 1
+            : widget.item.count = (widget.item.count! + 1);
+        print(widget.item.count.toString());
 
-      bool update = false;
-      for (var c in GlobalVariables.cartList) {
-        if (c.item == widget.item)
-          update = true;
-      }
-      if (!update)
-        GlobalVariables.cartList.add(CartListModule(item: widget.item));
-
-    });
-
-    widget.refresh!();
-  }
-
-  _minimise() {
-    setState(() {
-      widget.item.count == 1
-          ? widget.item.count = null
-          : widget.item.count = (widget.item.count! -1);
-      //print(widget.item.count.toString());
-
-      bool update = false;
-      if(widget.item.count == null) {
-        GlobalVariables.cartList.removeWhere((element) => element.item == widget.item);
-        print(GlobalVariables.cartList.length.toString());
+        bool update = false;
+        for (var c in GlobalVariables.cartList) {
+          if (c.item.name == widget.item.name)
+            update = true;
+        }
+        if (!update)
+          GlobalVariables.cartList.add(CartListModule(item: widget.item));
 
         widget.refresh!();
-      }
-    });
+      });
+    }
   }
-}
+
+    _minimise() {
+      setState(() {
+        widget.item.count == 1
+            ? widget.item.count = null
+            : widget.item.count = (widget.item.count! - 1);
+        //print(widget.item.count.toString());
+
+        bool update = false;
+        if (widget.item.count == null) {
+          GlobalVariables.cartList.removeWhere((element) =>
+          element.item == widget.item);
+          print(GlobalVariables.cartList.length.toString());
+
+          widget.refresh!();
+        }
+      });
+    }
+  }
 
 
