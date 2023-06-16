@@ -281,5 +281,9 @@ class _LoginPageState extends State<LoginPage> {
 
     AddPerson(person).add();
 
+    Navigator.pop(
+      context,
+    );
   }
+
 }
