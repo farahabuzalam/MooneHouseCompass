@@ -19,6 +19,7 @@ class AddPerson{
 
     print(GlobalVariables.person!.name);
 
+
     /* Update */
     // p.name = 'Omar';
     //p.save();

@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   : GlobalVariables.selectedTap == 2 && GlobalVariables.cartList.length>0? CartPage(refresh: ()=> _setState())
                   : GlobalVariables.selectedTap == 2 && GlobalVariables.cartList.length==0? EmptyCart(refresh: ()=> _setState())
                   : GlobalVariables.selectedTap == 3? BrandPage(refresh: ()=> _setState())
-                  : ProfilePage(),
+                  : ProfilePage(refresh: ()=> _setState()),
 
               Container(
                   height: 100,
