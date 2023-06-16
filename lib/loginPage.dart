@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
-import 'package:testproject/modules/person.dart';
+import 'package:testproject/storeData/PersonModule.dart';
 import 'package:testproject/storeData/addPerson.dart';
 
 class LoginPage extends StatefulWidget {
@@ -270,11 +270,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _login() {
-    var person = Person(
-      name : 'Anan',
-      email : _emailController.text,
-      city : 'Dubai',
-      phone : '55455445');
+    var person = Person()
+      ..name = 'Anan'
+      ..email = _emailController.text
+      ..city = 'Dubai'
+      ..phone = '0507436833';
+
 
 
 

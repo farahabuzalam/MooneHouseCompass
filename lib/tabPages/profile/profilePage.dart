@@ -108,6 +108,6 @@ class _ProfilePageState extends State<ProfilePage> {
   _login(){
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) =>  LoginPage()));
+        MaterialPageRoute(builder: (context) =>  LoginPage())).then((value) => setState((){}));
   }
 }
