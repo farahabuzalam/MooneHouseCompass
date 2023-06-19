@@ -276,9 +276,6 @@ class _LoginPageState extends State<LoginPage> {
       ..city = 'Dubai'
       ..phone = '0507436833';
 
-
-
-
     AddPerson(person).add();
 
     Navigator.pop(

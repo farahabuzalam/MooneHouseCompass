@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:testproject/globalVariables.dart';
 
 @HiveType(typeId: 0)
 class Person extends HiveObject {

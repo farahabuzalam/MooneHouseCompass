@@ -4,8 +4,6 @@ class CartListModule {
 
   ItemContainerModule item;
 
-
-
   CartListModule({
     required this.item });
 

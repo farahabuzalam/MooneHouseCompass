@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -6,14 +5,19 @@ import 'package:testproject/constants/appStrings.dart';
 import 'package:testproject/globalVariables.dart';
 import 'package:testproject/homeScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:testproject/modules/cartListModule.dart';
+import 'package:testproject/modules/itemContainerModule.dart';
 import 'package:testproject/storeData/PersonModule.dart';
+import 'package:testproject/storeData/cartItemModule.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
+
   var path = (await getApplicationDocumentsDirectory()).path;
+
 
   /* Hive Init */
   if (!Hive.isBoxOpen(AppStrings.personBox))
@@ -28,6 +32,37 @@ void main() async {
       print(p.getAt(0));
       GlobalVariables.person = p.getAt(0);
     }
+
+  /* Hive Init */
+  if (!Hive.isBoxOpen(AppStrings.cartBox))
+    Hive.init(path);
+
+  if (!Hive.isAdapterRegistered(1))
+    Hive.registerAdapter(CartAdapter());
+
+  Box c = await Hive.openBox(AppStrings.cartBox);
+
+  if (c.length > 0) {
+    print(c.getAt(0));
+    for(CartItem i in c.values)
+      {
+        GlobalVariables.cartList.add(CartListModule(
+            item:
+        ItemContainerModule(
+            off: 'off',
+            rating: i.rating,
+            name: i.name,
+            wight: i.wight,
+            image: i.image,
+            price: i.price,
+            isDeal: i.isDeal,
+            oldPrice: i.oldPrice
+            )
+        )
+        ) ;
+      }
+
+  }
 
   runApp(
     EasyLocalization(
