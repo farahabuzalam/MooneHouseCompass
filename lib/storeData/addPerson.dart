@@ -13,7 +13,8 @@ class AddPerson{
     Box box = await Hive.openBox(AppStrings.personBox);
     box.add(this.person);
 
-    GlobalVariables.person = box.getAt(0);
+
+    GlobalVariables.person = box.getAt(box.length-1);
 
    // p = box.getAt(0);
 

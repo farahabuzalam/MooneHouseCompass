@@ -6,7 +6,9 @@ import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/globalVariables.dart';
 import 'package:testproject/modules/cartListModule.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
+import 'package:testproject/storeData/PersonModule.dart';
 import 'package:testproject/storeData/addCart.dart';
+import 'package:testproject/storeData/addPerson.dart';
 import 'package:testproject/storeData/cartItemModule.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -190,7 +192,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
         GlobalVariables.cartList.add(CartListModule(item: widget.item));
 
-        var item = CartItem()
+        var item = Person()
           ..name = widget.item.name
           ..price = widget.item.price
           ..count = _count
@@ -201,7 +203,7 @@ class _DetailScreenState extends State<DetailScreen> {
           ..wight = widget.item.wight
           ..rating = widget.item.rating;
 
-        AddCart(item).add();
+        AddPerson(item).add();
 
       }
 

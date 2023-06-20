@@ -20,20 +20,18 @@ void main() async {
 
 
   /* Hive Init */
-  if (!Hive.isBoxOpen(AppStrings.personBox))
-    Hive.init(path);
-
-  if (!Hive.isAdapterRegistered(0))
-    Hive.registerAdapter(PersonAdapter());
+  Hive
+    ..init(path)
+    ..registerAdapter(PersonAdapter());
 
   Box p = await Hive.openBox(AppStrings.personBox);
 
     if (p.length > 0) {
       print(p.getAt(0));
-      GlobalVariables.person = p.getAt(0);
+      GlobalVariables.person = p.getAt(p.length -1);
     }
 
-  /* Hive Init */
+  /* Hive Init
   if (!Hive.isBoxOpen(AppStrings.cartBox))
     Hive.init(path);
 
@@ -62,7 +60,7 @@ void main() async {
         ) ;
       }
 
-  }
+  }*/
 
   runApp(
     EasyLocalization(

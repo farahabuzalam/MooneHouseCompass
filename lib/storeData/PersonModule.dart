@@ -7,13 +7,28 @@ class Person extends HiveObject {
   late String name;
 
   @HiveField(1)
-  late String email;
+  late double price;
 
   @HiveField(2)
-  late String phone;
+  late int count;
 
   @HiveField(3)
-  late String city;
+  late double totalPrice;
+
+  @HiveField(4)
+  late String rating;
+
+  @HiveField(5)
+  late String wight;
+
+  @HiveField(6)
+  late String image;
+
+  @HiveField(7)
+  late bool isDeal;
+
+  @HiveField(8)
+  late double oldPrice;
 }
 
 class PersonAdapter extends TypeAdapter<Person>{

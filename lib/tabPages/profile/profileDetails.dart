@@ -96,7 +96,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                             child: Material(
                               color: AppColor.white,
                               child: TextField(
-                                controller: TextEditingController(text: GlobalVariables.person!.email),
+                            //    controller: TextEditingController(text: GlobalVariables.person!.email),
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -119,7 +119,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                             child: Material(
                               color: AppColor.white,
                               child: TextField(
-                                controller: TextEditingController(text: GlobalVariables.person!.phone),
+                          //      controller: TextEditingController(text: GlobalVariables.person!.phone),
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -143,7 +143,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                             child: Material(
                               color: AppColor.white,
                               child: TextField(
-                                controller: TextEditingController(text: GlobalVariables.person!.city),
+                              //  controller: TextEditingController(text: GlobalVariables.person!.city),
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(20))),
