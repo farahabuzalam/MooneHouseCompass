@@ -174,7 +174,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   Widget build(BuildContext context) {
-    return   Expanded(
+
+    _ramadanBest = GlobalVariables.bestSellerProducts;
+    _ramadanRecent = GlobalVariables.recentlyAddedProducts;
+    _ramadanList = GlobalVariables.essentialsProducts;
+
+    return Expanded(
           child: Padding(
             padding: EdgeInsets.all(AppSize.padding10),
             child: ListView(children: [

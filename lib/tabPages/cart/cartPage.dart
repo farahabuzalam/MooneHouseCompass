@@ -20,7 +20,8 @@ class _CartPageState extends State<CartPage> {
     double total = 0;
 
     GlobalVariables.cartList.forEach((element) {
-      total += element.item.price * element.item.count!;
+
+      total += element.item.count !=null? element.item.price * element.item.count!: 0.0;
     });
 
 

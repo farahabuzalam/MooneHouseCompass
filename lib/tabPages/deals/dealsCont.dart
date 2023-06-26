@@ -6,15 +6,17 @@ import 'package:testproject/globalVariables.dart';
 import 'package:testproject/loginPage.dart';
 import 'package:testproject/modules/cartListModule.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
+import 'package:testproject/storeData/addCart.dart';
+import 'package:testproject/storeData/cartItemModule.dart';
 
 
 class DealsCont extends StatefulWidget {
   ItemContainerModule item;
-  Function()? refresh;
+  Function() refresh;
 
 
   DealsCont(
-      {Key? key, required this.item,this.refresh}) : super(key: key);
+      {Key? key, required this.item, required this.refresh}) : super(key: key);
 
   @override
 
@@ -24,6 +26,16 @@ class DealsCont extends StatefulWidget {
 class _DealsContState extends State<DealsCont> {
 
   int percentage = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    for(var v in GlobalVariables.cartList){
+      if(widget.item .name == v.item.name)
+        widget.item.count = v.item.count;
+    }
+  }
 
 
   Widget build(BuildContext context) {
@@ -137,7 +149,7 @@ class _DealsContState extends State<DealsCont> {
                   builder: (context) => DetailScreen(item: widget.item)),
             ).then((value) =>
                 setState(() {
-                  widget.refresh!();
+                  widget.refresh();
                 }))
     );
   }
@@ -166,8 +178,9 @@ class _DealsContState extends State<DealsCont> {
           context,
           MaterialPageRoute(builder: (context) => LoginPage())).then((value) =>
           setState(() {}));
-    } else {
-      setState(() {
+    }
+    else {
+      setState(() async{
         widget.item.count == null
             ? widget.item.count = 1
             : widget.item.count = (widget.item.count! + 1);
@@ -179,9 +192,40 @@ class _DealsContState extends State<DealsCont> {
             update = true;
         }
         if (!update)
-          GlobalVariables.cartList.add(CartListModule(item: widget.item));
+          {
+            GlobalVariables.cartList.add(CartListModule(item: widget.item));
+          var item = CartItem()
+            ..name = widget.item.name
+            ..price = widget.item.price
+            ..count = widget.item.count!
+            ..totalPrice = (widget.item.count! * widget.item.price)
+            ..image = widget.item.image
+            ..oldPrice = widget.item.oldPrice
+            ..isDeal = widget.item.isDeal
+            ..wight = widget.item.wight
+            ..rating = widget.item.rating;
 
-        widget.refresh!();
+          await AddCart(item).add();
+
+          }
+        else{
+
+          var item = CartItem()
+            ..name = widget.item.name
+            ..price = widget.item.price
+            ..count = widget.item.count!
+            ..totalPrice = (widget.item.count! * widget.item.price)
+            ..image = widget.item.image
+            ..oldPrice = widget.item.oldPrice
+            ..isDeal = widget.item.isDeal
+            ..wight = widget.item.wight
+            ..rating = widget.item.rating;
+
+          await AddCart(item).update();
+        }
+
+        widget.refresh();
+
       });
     }
   }
@@ -193,13 +237,26 @@ class _DealsContState extends State<DealsCont> {
             : widget.item.count = (widget.item.count! - 1);
         //print(widget.item.count.toString());
 
+        var item = CartItem()
+          ..name = widget.item.name
+          ..price = widget.item.price
+          ..count = widget.item.count!
+          ..totalPrice = (widget.item.count! * widget.item.price)
+          ..image = widget.item.image
+          ..oldPrice = widget.item.oldPrice
+          ..isDeal = widget.item.isDeal
+          ..wight = widget.item.wight
+          ..rating = widget.item.rating;
+
+        AddCart(item).update();
+
         bool update = false;
         if (widget.item.count == null) {
           GlobalVariables.cartList.removeWhere((element) =>
           element.item == widget.item);
           print(GlobalVariables.cartList.length.toString());
 
-          widget.refresh!();
+          widget.refresh();
         }
       });
     }

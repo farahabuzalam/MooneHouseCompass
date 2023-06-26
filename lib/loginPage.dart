@@ -271,10 +271,10 @@ class _LoginPageState extends State<LoginPage> {
 
   _login() {
     var person = Person()
-      ..name = 'Anan';
-      //..email = _emailController.text
-     // ..city = 'Dubai'
-      //..phone = '0507436833';
+      ..name = 'Anan'
+      ..email = _emailController.text
+      ..city = 'Dubai'
+      ..phone = '0507436833';
 
     AddPerson(person).add();
 

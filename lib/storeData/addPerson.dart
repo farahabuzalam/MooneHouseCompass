@@ -14,7 +14,7 @@ class AddPerson{
     box.add(this.person);
 
 
-    GlobalVariables.person = box.getAt(box.length-1);
+    GlobalVariables.person = box.getAt(0);
 
    // p = box.getAt(0);
 

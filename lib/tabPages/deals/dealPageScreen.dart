@@ -660,6 +660,7 @@ class _DealPageScreen extends State<DealPageScreen> {
   }
 
   _gridList(List<ItemContainerModule> list) {
-    return list.map((e) => DealsCont(item: e)).toList();
+    return list.map((e) => DealsCont(item: e, refresh:()=> widget.refresh() )).toList();
   }
+
 }

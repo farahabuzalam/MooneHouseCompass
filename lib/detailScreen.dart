@@ -4,6 +4,7 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/globalVariables.dart';
+import 'package:testproject/loginPage.dart';
 import 'package:testproject/modules/cartListModule.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
 import 'package:testproject/storeData/PersonModule.dart';
@@ -163,10 +164,17 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   _add() {
-    setState(() {
-     _count ++;
+    if (GlobalVariables.person == null) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage())).then((value) =>
+          setState(() {}));
+    }
+    else {   setState(() {
+      _count ++;
       print(_count.toString());
-    });
+    });}
+
   }
 
   _minimise() {
@@ -175,43 +183,70 @@ class _DetailScreenState extends State<DetailScreen> {
           ? _count = 1
           :_count = (_count - 1);
       print(_count.toString());
+
+    /*  var item = CartItem()
+        ..name = widget.item.name
+        ..price = widget.item.price
+        ..count = _count
+        ..totalPrice = (_count * widget.item.price)
+        ..image = widget.item.image
+        ..oldPrice = widget.item.oldPrice
+        ..isDeal = widget.item.isDeal
+        ..wight = widget.item.wight
+        ..rating = widget.item.rating;
+
+      AddCart(item).update();
+*/
     });
   }
 
   _addToCart()
   {
-    bool update = false;
+    if (GlobalVariables.person == null) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage())).then((value) =>
+          setState(() {}));
+    }
+    else {
+      bool update = false;
+
     for(var c in GlobalVariables.cartList)
     {
-      if(c.item == widget.item)
+      if(c.item.name == widget.item.name)
         update = true;
+    }
+
+
+      widget.item.count = _count;
+
+      var item = CartItem()
+        ..name = widget.item.name
+        ..price = widget.item.price
+        ..count = _count
+        ..totalPrice = (_count * widget.item.price)
+        ..image = widget.item.image
+        ..oldPrice = widget.item.oldPrice
+        ..isDeal = widget.item.isDeal
+        ..wight = widget.item.wight
+        ..rating = widget.item.rating;
+
+
+    if (!update)
+    {
+      GlobalVariables.cartList.add(CartListModule(item: widget.item));
+       AddCart(item).add();
 
     }
-    if (!update)
-      {
+    else {
+      AddCart(item).update();
+    }
 
-        GlobalVariables.cartList.add(CartListModule(item: widget.item));
-
-        var item = Person()
-          ..name = widget.item.name
-          ..price = widget.item.price
-          ..count = _count
-          ..totalPrice = (_count * widget.item.price)
-          ..image = widget.item.image
-          ..oldPrice = widget.item.oldPrice
-          ..isDeal = widget.item.isDeal
-          ..wight = widget.item.wight
-          ..rating = widget.item.rating;
-
-        AddPerson(item).add();
-
-      }
-
-
-
-
-    widget.item.count = _count;
     Navigator.pop(context, );
+
+
+    }
+
 
   }
 

@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
-import 'package:testproject/modules/itemContainerModule.dart';
+
+part 'cartItemModule.g.dart';
+
 
 @HiveType(typeId: 1)
 class CartItem extends HiveObject {
@@ -11,7 +13,7 @@ class CartItem extends HiveObject {
   late double price;
 
   @HiveField(2)
-   late int count;
+  late int? count;
 
   @HiveField(3)
   late double totalPrice;
@@ -34,11 +36,22 @@ class CartItem extends HiveObject {
 
 }
 
+/*
 class CartAdapter extends TypeAdapter<CartItem>{
   @override
   CartItem read(BinaryReader reader) {
     // TODO: implement read
-    return CartItem();
+    return CartItem()
+      ..oldPrice = reader.readDouble()
+      ..image = reader.readString()
+      ..isDeal = reader.readBool()
+      ..rating = reader.readString()
+      ..wight = reader.readString()
+      ..price = reader.readDouble()
+      ..totalPrice = reader.readDouble()
+      ..count = reader.readInt()
+      ..name = reader.readString()
+    ;
     throw UnimplementedError();
   }
 
@@ -48,6 +61,15 @@ class CartAdapter extends TypeAdapter<CartItem>{
 
   @override
   void write(BinaryWriter writer, CartItem obj) {
+    writer.writeString(obj.name);
+    writer.writeInt(obj.count);
+    writer.writeDouble(obj.totalPrice);
+    writer.writeDouble(obj.price);
+    writer.writeString(obj.wight);
+    writer.writeString(obj.rating);
+    writer.writeBool(obj.isDeal);
+    writer.writeDouble(obj.oldPrice);
+    writer.writeString(obj.image);
     // TODO: implement write
   }
-}
+}*/

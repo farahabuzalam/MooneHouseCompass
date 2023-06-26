@@ -11,6 +11,7 @@ import 'package:testproject/storeData/PersonModule.dart';
 import 'package:testproject/storeData/cartItemModule.dart';
 
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -20,7 +21,9 @@ void main() async {
 
 
   /* Hive Init */
-  Hive
+
+
+ Hive
     ..init(path)
     ..registerAdapter(PersonAdapter());
 
@@ -28,8 +31,35 @@ void main() async {
 
     if (p.length > 0) {
       print(p.getAt(0));
-      GlobalVariables.person = p.getAt(p.length -1);
+      GlobalVariables.person = p.getAt(p.length - 1);
     }
+
+
+  /* Hive Init */
+ Hive
+    //..init(path)
+    ..registerAdapter(CartItemAdapter());
+
+  Box c = await Hive.openBox(AppStrings.cartBox);
+
+
+  if (c.length > 0) {
+    //print(c.getAt(0));
+    for(CartItem i in c.values){
+      GlobalVariables.cartList.add(CartListModule(
+          item: ItemContainerModule(
+              off: 'off',
+              rating: i.rating,
+              name: i.name,
+              wight: i.wight,
+              image: i.image,
+              price: i.price ,
+              isDeal: i.isDeal,
+              oldPrice: i.oldPrice,
+              count: i.count)));
+
+    }
+  }
 
   /* Hive Init
   if (!Hive.isBoxOpen(AppStrings.cartBox))

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:testproject/constants/appStrings.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/globalVariables.dart';
 import 'package:testproject/modules/cartListModule.dart';
+import 'package:testproject/storeData/addCart.dart';
+import 'package:testproject/storeData/cartItemModule.dart';
 
 
 import '../../modules/itemContainerModule.dart';
@@ -19,6 +23,15 @@ class CartCount extends StatefulWidget {
 
 class _CartCountState extends State<CartCount> {
 
+ /* @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    for(var v in GlobalVariables.cartList){
+      if(widget.item .name == v.item.name)
+        widget.item.count = v.item.count;
+    }
+  }*/
 
   @override
   Widget build(BuildContext context)
@@ -80,7 +93,8 @@ class _CartCountState extends State<CartCount> {
                       ],
                     ),
                     Text(
-                      '${totalPrice = totalPrice * widget.item.count!}',
+                      widget.item.count != null?
+                      '${totalPrice = totalPrice * widget.item.count!}': "0.0" ,
                       style: TextStyle(
                           color: AppColor.black,
                           backgroundColor: Colors.grey.shade100,
@@ -89,8 +103,12 @@ class _CartCountState extends State<CartCount> {
                     IconButton(
                         icon: Icon(Icons.delete_outlined),
                         onPressed: ()=>  {
-                          GlobalVariables.cartList.removeWhere((element) => element.item == widget.item),
-                          widget.refresh!(),
+                          setState(() {
+                        GlobalVariables.cartList.removeWhere((element) => element.item == widget.item);
+                        _deleteFromBox();
+                        widget.refresh!();
+                          }),
+
                         }
                     ),      ],
                 ),
@@ -125,8 +143,8 @@ class _CartCountState extends State<CartCount> {
     );
   }
 
-  _add() {
-    setState(() {
+  _add()  {
+    setState(() async {
       widget.item.count == null
           ? widget.item.count = 1
           : widget.item.count = (widget.item!.count! + 1);
@@ -138,9 +156,38 @@ class _CartCountState extends State<CartCount> {
           update = true;
       }
       if (!update)
+      {
         GlobalVariables.cartList.add(CartListModule(item: widget.item));
+        var item = CartItem()
+          ..name = widget.item.name
+          ..price = widget.item.price
+          ..count = widget.item.count!
+          ..totalPrice = (widget.item.count! * widget.item.price)
+          ..image = widget.item.image
+          ..oldPrice = widget.item.oldPrice
+          ..isDeal = widget.item.isDeal
+          ..wight = widget.item.wight
+          ..rating = widget.item.rating;
 
-      widget.refresh!();
+        await AddCart(item).add();
+
+      }
+      else{
+
+        var item = CartItem()
+          ..name = widget.item.name
+          ..price = widget.item.price
+          ..count = widget.item.count!
+          ..totalPrice = (widget.item.count! * widget.item.price)
+          ..image = widget.item.image
+          ..oldPrice = widget.item.oldPrice
+          ..isDeal = widget.item.isDeal
+          ..wight = widget.item.wight
+          ..rating = widget.item.rating;
+
+        await AddCart(item).update();
+      }
+     widget.refresh!();
 
 
     });
@@ -148,13 +195,24 @@ class _CartCountState extends State<CartCount> {
   }
 
   _minimise() {
-    setState(() {
+    setState(() async {
       widget.item.count == 1
           ? widget.item.count = null
           : widget.item.count = (widget.item.count! -1);
       //print(widget.item.count.toString());
 
-      bool update = false;
+      var item = CartItem()
+        ..name = widget.item.name
+        ..price = widget.item.price
+        ..count = widget.item.count
+        ..totalPrice = widget.item.count != null? (widget.item.count! * widget.item.price): 0.0
+        ..image = widget.item.image
+        ..oldPrice = widget.item.oldPrice
+        ..isDeal = widget.item.isDeal
+        ..wight = widget.item.wight
+        ..rating = widget.item.rating;
+
+      await AddCart(item).update();
 
       if(widget.item.count == null) {
         GlobalVariables.cartList.removeWhere((element) => element.item == widget.item);
@@ -166,6 +224,25 @@ class _CartCountState extends State<CartCount> {
 
 
     });
+  }
+
+  _deleteFromBox()  {
+
+    widget.item.count = null;
+
+      var item = CartItem()
+        ..name = widget.item.name
+        ..price = widget.item.price
+        ..count = widget.item.count
+        ..totalPrice = widget.item.count != null? (widget.item.count! * widget.item.price): 0.0
+        ..image = widget.item.image
+        ..oldPrice = widget.item.oldPrice
+        ..isDeal = widget.item.isDeal
+        ..wight = widget.item.wight
+        ..rating = widget.item.rating;
+
+       AddCart(item).update();
+
   }
 }
 

@@ -201,6 +201,10 @@ class _ProfilePageState extends State<ProfilePage> {
     box.clear();
     GlobalVariables.person = null;
 
+    Box box2 = await Hive.openBox(AppStrings.cartBox);
+    box2.clear();
+    GlobalVariables.cartList.clear();
+
     /* Box cartBox = await Hive.openBox(AppStrings.cartBox);
       cartBox.clear();
      GlobalVariables.cartList.clear();*/

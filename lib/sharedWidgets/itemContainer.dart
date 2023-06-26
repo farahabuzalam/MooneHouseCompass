@@ -6,6 +6,8 @@ import 'package:testproject/globalVariables.dart';
 import 'package:testproject/loginPage.dart';
 import 'package:testproject/modules/cartListModule.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
+import 'package:testproject/storeData/addCart.dart';
+import 'package:testproject/storeData/cartItemModule.dart';
 
 
 class ItemContainer extends StatefulWidget {
@@ -163,12 +165,14 @@ class _ItemContainerState extends State<ItemContainer> {
           context,
           MaterialPageRoute(builder: (context) => LoginPage())).then((value) =>
           setState(() {}));
-    }else{
+    }
+    else{
 
-      setState(() {
+      setState(() async {
         widget.item.count == null
             ? widget.item.count = 1
             : widget.item.count = (widget.item.count! + 1);
+
         print(widget.item.count.toString());
 
         bool update = false;
@@ -176,38 +180,65 @@ class _ItemContainerState extends State<ItemContainer> {
         {
           if(c.item.name == widget.item.name)
             update = true;
-
-
         }
-        if (!update)
+
+        var item = CartItem()
+          ..name = widget.item.name
+          ..price = widget.item.price
+          ..count = widget.item.count!
+          ..totalPrice = (widget.item.count! * widget.item.price)
+          ..image = widget.item.image
+          ..oldPrice = widget.item.oldPrice
+          ..isDeal = widget.item.isDeal
+          ..wight = widget.item.wight
+          ..rating = widget.item.rating;
+
+        if (!update) {
           GlobalVariables.cartList.add(CartListModule(item: widget.item));
+
+        await AddCart(item).add();
+        }
+        else{
+
+         await  AddCart(item).update();
+        }
 
         widget.refresh!();
 
-      });
+      }
+
+      );
     }
-
-
-
-
   }
+
   _minimise() {
     setState(() {
+
       widget.item.count == 1
           ? widget.item.count = null
           : widget.item.count = (widget.item.count! - 1);
-      //print(widget.item.count.toString());
-      bool update = false;
 
-      if(widget.item.count == null) {
-        GlobalVariables.cartList.removeWhere((element) => element.item == widget.item);
+      var item = CartItem()
+        ..name = widget.item.name
+        ..price = widget.item.price
+        ..count = widget.item.count
+        ..totalPrice = widget.item.count != null? (widget.item.count! * widget.item.price): 0.0
+        ..image = widget.item.image
+        ..oldPrice = widget.item.oldPrice
+        ..isDeal = widget.item.isDeal
+        ..wight = widget.item.wight
+        ..rating = widget.item.rating;
+
+
+      if(widget.item.count == null)
+        GlobalVariables.cartList.removeWhere((element) => element.item.name == widget.item.name);
         print(GlobalVariables.cartList.length.toString());
 
-        widget.refresh!();
-      }
-
+      AddCart(item).update();
+      widget.refresh!();
     });
   }
+
 
 
 }

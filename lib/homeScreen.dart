@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:testproject/api.dart';
 import 'package:testproject/constants/appStrings.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
@@ -80,7 +81,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           navigateItem: 'Home'.tr(),
                           navigateIcon: Icon(Icons.home_outlined),
                           pageNumber: 0,
-                          press: () => _press(0),
+                          press: () async  => {
+                          await Api().getBestSeller(),
+                            await Api().getRecentlyAdded(),
+                            await Api().getEssentialProducts(),
+                            _press(0),
+                          },
                         ),
                         NavigateItem(
                           navigateItem: 'Deals'.tr(),

@@ -7,35 +7,27 @@ class Person extends HiveObject {
   late String name;
 
   @HiveField(1)
-  late double price;
+  late String email;
 
   @HiveField(2)
-  late int count;
+  late String phone;
 
   @HiveField(3)
-  late double totalPrice;
+  late String city;
 
-  @HiveField(4)
-  late String rating;
 
-  @HiveField(5)
-  late String wight;
-
-  @HiveField(6)
-  late String image;
-
-  @HiveField(7)
-  late bool isDeal;
-
-  @HiveField(8)
-  late double oldPrice;
 }
 
 class PersonAdapter extends TypeAdapter<Person>{
   @override
   Person read(BinaryReader reader) {
     // TODO: implement read
-    return Person();
+    return Person()
+      ..name = reader.read()
+      ..phone = reader.read()
+      ..email = reader.read()
+      ..city = reader.read()
+    ;
     throw UnimplementedError();
   }
 
@@ -45,6 +37,10 @@ class PersonAdapter extends TypeAdapter<Person>{
 
   @override
   void write(BinaryWriter writer, Person obj) {
+    writer.write(obj.name);
+    writer.write(obj.phone);
+    writer.write(obj.email);
+    writer.write(obj.city);
     // TODO: implement write
   }
 }
