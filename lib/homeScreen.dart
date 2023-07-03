@@ -92,7 +92,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           navigateItem: 'Deals'.tr(),
                           navigateIcon: Icon(Icons.price_check_outlined),
                           pageNumber: 1,
-                          press: () => _press(1),
+                          press: () async => {
+                            await Api().getFreeDelivery(),
+                            await Api().getBuyOneGetOne(),
+                            await Api().getAbove50(),
+                            await Api().getBelow50(),
+                            await Api().getBundles(),
+                            _press(1),
+                          }
                         ),
                         NavigateItem(
                           navigateItem: 'Cart'.tr(),

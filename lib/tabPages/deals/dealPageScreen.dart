@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
+import 'package:testproject/globalVariables.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
 import 'package:testproject/tabPages/deals/dealsCont.dart';
 
@@ -575,6 +576,12 @@ class _DealPageScreen extends State<DealPageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _FreeDelivery = GlobalVariables.freeDeliveryProducts;
+    _BuyOneGetOne = GlobalVariables.buyOneGetOneProducts;
+    _Above50 = GlobalVariables.above50Products;
+    _Below50 = GlobalVariables.below50Products;
+    _bundles = GlobalVariables.bundlesProducts;
+
     return Expanded(
         child: Padding(
       padding: EdgeInsets.all(AppSize.padding10),
