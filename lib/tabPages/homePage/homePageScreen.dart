@@ -1,6 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:testproject/categories/categoryCont.dart';
+import 'package:testproject/categories/mainCategoryModule.dart';
+import 'package:testproject/categories/subCategoryModule.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/globalVariables.dart';
@@ -23,6 +27,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
   List<ItemContainerModule> _ramadanBest = [];
   List<ItemContainerModule> _ramadanRecent = [];
   List<Slide> _slideList = [];
+  List<MainCategoryModule> _mainCategories = [];
+  List<SubCategoryModule> _dairyProducts = [];
+  List<SubCategoryModule> _nutProducts = [];
+  List<SubCategoryModule> _olivesAndOils = [];
+
 
 
 
@@ -30,6 +39,82 @@ class _HomePageScreenState extends State<HomePageScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _olivesAndOils.add(SubCategoryModule(
+        categoryName: "Olive Oil",
+        list: null,
+        image: "https://chriskresser.com/wp-content/uploads/177433263.jpg")
+    );
+
+    _olivesAndOils.add(SubCategoryModule(
+        categoryName: "Green Olive",
+        list: null,
+        image: "https://uploads-ssl.webflow.com/5cf62806c6188329a4fafe4b/5cf62806c61883599ffaff44_green_edit.jpg")
+    );
+
+
+    _olivesAndOils.add(SubCategoryModule(
+        categoryName: "Black Olive",
+        list: null,
+        image: "https://www.ccfinefoods.co.uk/wp-content/uploads/11-015-black-pitted-olives.jpg")
+    );
+
+
+    _olivesAndOils.add(SubCategoryModule(
+        categoryName: "Vegetable Oil",
+        list: null,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq6ICoZg1AI_XQx4YP8Jv2Chl6_xViDTc9AQ&usqp=CAU")
+    );
+
+
+
+    _dairyProducts.add(SubCategoryModule(
+        categoryName: "Milk",
+        list: null,
+        image: "https://atlas-content-cdn.pixelsquid.com/stock-images/milk-bottle-jug-AvXMAk9-600.jpg")
+    );
+
+    _dairyProducts.add(SubCategoryModule(
+        categoryName: "Cheese",
+        list: null,
+        image: "https://www.mashed.com/img/gallery/almost-a-third-of-all-people-think-this-is-the-best-cheese/intro-1615316663.jpg")
+    );
+
+    _dairyProducts.add(SubCategoryModule(
+        categoryName: "Yoghurt",
+        list: null,
+        image: "https://cdnprod.mafretailproxy.com/sys-master-root/h67/hfd/32565290074142/466738_main.jpg_480Wx480H")
+    );
+
+    _nutProducts.add(SubCategoryModule(
+        categoryName: "Fresh Nuts",
+        list: null,
+        image: "https://www.dorri.co.uk/wp-content/uploads/2018/09/raw_mixed_nuts.jpeg")
+    );
+
+    _nutProducts.add(SubCategoryModule(
+        categoryName: "Toasted Nuts",
+        list: null,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSXrI8Zp-gt9dTWmNrWFXbP8MoRMIa6zribA&usqp=CAU")
+    );
+
+
+    _mainCategories.add(MainCategoryModule(
+        categoryName: "Dairy and Cheese Products",
+        list: _dairyProducts,
+        image: "https://www.foodsafetynews.com/files/2020/03/cheese-assortment-with-milk.jpg")
+    );
+
+    _mainCategories.add(MainCategoryModule(categoryName: "Nuts",
+        list: _nutProducts,
+        image: "https://s12857.pcdn.co/en-US/blog/wp-content/uploads/2019/05/190513_NutsForNuts.jpg")
+    );
+    
+    _mainCategories.add(MainCategoryModule(
+        categoryName: "Olives and Oils",
+        list: _olivesAndOils,
+        image: "https://cdn.britannica.com/55/157155-050-D07F5610/Containers-olive-oil.jpg")
+    );
 
     _ramadanList.add(ItemContainerModule(
         off: 'off',
@@ -222,6 +307,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
               SizedBox(
                 height: AppSize.margin20,
               ),
+              _text("Categories".tr()),
+              SizedBox(
+                height: AppSize.margin20,
+              ),
+              _categoryHorizontalList(_mainCategories),
+
+
+
               /*Align(
                                 alignment: Alignment.center,
                                 child: Container(
@@ -277,6 +370,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
       );
     }
 
+  _categoryHorizontalList(List<MainCategoryModule> list) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Column(
+        children: [
+          Row(
+            children: list.map((e) => CategoryCont(item: e)).toList(),
+          ),
+        ],
+      ),
+    );
+  }
 
 
 }

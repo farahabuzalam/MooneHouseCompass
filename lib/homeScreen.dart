@@ -1,16 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:testproject/api.dart';
-import 'package:testproject/constants/appStrings.dart';
 import 'package:testproject/constants/appcolor.dart';
 import 'package:testproject/constants/appsize.dart';
 import 'package:testproject/globalVariables.dart';
 import 'package:testproject/modules/slideModule.dart';
 import 'package:testproject/navigateItem.dart';
-import 'package:testproject/productScreen.dart';
 import 'package:testproject/modules/itemContainerModule.dart';
 import 'package:testproject/tabPages/brand/brandPage.dart';
 import 'package:testproject/tabPages/cart/cartPage.dart';
@@ -18,7 +13,6 @@ import 'package:testproject/tabPages/cart/emptyCart.dart';
 import 'package:testproject/tabPages/deals/dealPageScreen.dart';
 import 'package:testproject/tabPages/homePage/homePageScreen.dart';
 import 'package:testproject/tabPages/profile/profilePage.dart';
-import 'sharedWidgets/itemContainer.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -40,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return WillPopScope(
+    return  WillPopScope(
       onWillPop: _onWillPop,
 
       child: Scaffold(
@@ -82,9 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           navigateIcon: Icon(Icons.home_outlined),
                           pageNumber: 0,
                           press: () async  => {
-                          await Api().getBestSeller(),
-                            await Api().getRecentlyAdded(),
-                            await Api().getEssentialProducts(),
+                          //await Api().getBestSeller(),
+                           // await Api().getRecentlyAdded(),
+                           // await Api().getEssentialProducts(),
                             _press(0),
                           },
                         ),
@@ -93,11 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           navigateIcon: Icon(Icons.price_check_outlined),
                           pageNumber: 1,
                           press: () async => {
-                            await Api().getFreeDelivery(),
-                            await Api().getBuyOneGetOne(),
-                            await Api().getAbove50(),
-                            await Api().getBelow50(),
-                            await Api().getBundles(),
+                            await Future.wait(
+                              [
+                              Api().getFreeDelivery(),
+                              Api().getBuyOneGetOne(),
+                              Api().getAbove50(),
+                              Api().getBelow50(),
+                              Api().getBundles(),
+                            ]),
                             _press(1),
                           }
                         ),

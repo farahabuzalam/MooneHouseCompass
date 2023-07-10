@@ -17,5 +17,6 @@ class GlobalVariables {
   static List <ItemContainerModule> above50Products = [];
   static List <ItemContainerModule> below50Products = [];
   static List <ItemContainerModule> bundlesProducts = [];
+  static bool isConnected = false;
 
 }

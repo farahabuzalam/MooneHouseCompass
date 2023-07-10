@@ -11,7 +11,7 @@ class Api {
   //String ip = 'http://compassint.ddns.net:1124/MooneHouseApi';
   String ip = 'https://www.moonehouse.com/MooneHouseApi';
 
-   Future<void>? getBestSeller() async {
+   Future<void> getBestSeller() async {
     try{
       var headers = {
         'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ class Api {
               image: element.imgAttached,
               price: element.price+0.0,
               isDeal: false,
-              details: "test details test",
+              details: "test details test " + element.alias+" " + element.centerTypeName +" "+ element.centerName+" "+element.statues,
               origin: "Origin: "+ element.origin ,
               brand: "Brand: " + element.brandName,
               oldPrice: element.discount+element.price+0.0,
@@ -68,7 +68,7 @@ class Api {
 
 
 
-   Future<void>? getEssentialProducts() async {
+   Future<void> getEssentialProducts() async {
 try{
   var headers = {
     'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ try{
 
    }
 
-   Future<void>? getRecentlyAdded() async {
+   Future<void> getRecentlyAdded() async {
 
      try{
        var headers = {
@@ -177,7 +177,7 @@ try{
 
    }
 
-  Future<void>? getFreeDelivery() async{
+  Future<dynamic> getFreeDelivery() async{
      try{
        var headers = {
          'Content-Type': 'application/json'
@@ -235,7 +235,7 @@ try{
 
   }
 
-  Future<void>? getBuyOneGetOne() async{
+  Future<void> getBuyOneGetOne() async{
      try{
 
        var headers = {
@@ -293,7 +293,7 @@ try{
          }
   }
 
-  Future<void>? getAbove50() async{
+  Future<void> getAbove50() async{
     try{
 
       var headers = {
@@ -351,7 +351,7 @@ try{
     }
   }
 
-  Future<void>? getBelow50() async{
+  Future<void> getBelow50() async{
     try{
 
       var headers = {
@@ -409,7 +409,7 @@ try{
     }
   }
 
-  Future<void>? getBundles() async{
+  Future<void> getBundles() async{
     try{
 
       var headers = {
